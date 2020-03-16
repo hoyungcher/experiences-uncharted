@@ -1,0 +1,62 @@
+[33mcommit e25e47ac567417e088b592d1aa068c07a7f205b7[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Merge: 7000fd0 43fdf47
+Author: Blake (Yung Cher Ho) <ycho527@hotmail.com>
+Date:   Mon Mar 16 16:31:41 2020 +0800
+
+    Merge pull request #3 from hoyungcher/create-host-user-routes
+    
+    Created basic routes
+
+[33mcommit 43fdf4776670391557aaa1aa666cbf03deff2489[m
+Author: Yung Cher Ho <ycho527@hotmail.com>
+Date:   Mon Mar 16 16:30:38 2020 +0800
+
+    Created basic routes
+
+[33mcommit 7000fd05016e0e93371b20944b4012cbc9886115[m
+Merge: 4c08b64 181b876
+Author: Blake (Yung Cher Ho) <ycho527@hotmail.com>
+Date:   Mon Mar 16 16:18:53 2020 +0800
+
+    Merge pull request #2 from hoyungcher/create-host-user-routes
+    
+    Create host user routes
+
+[33mcommit 181b876eb75f5824098f15f58782ed32fecf5e83[m
+Author: Yung Cher Ho <ycho527@hotmail.com>
+Date:   Mon Mar 16 16:18:02 2020 +0800
+
+    deleted procfile for heroku hotfix
+
+[33mcommit c87c5888890011a05df3b2d43d929ef14b067530[m
+Author: Yung Cher Ho <ycho527@hotmail.com>
+Date:   Mon Mar 16 16:17:40 2020 +0800
+
+    checking changes
+
+[33mcommit 4c08b64899df1305b1ddf2f3a810c4930ca869c6[m
+Merge: 6dff605 1c5d5c9
+Author: Blake (Yung Cher Ho) <ycho527@hotmail.com>
+Date:   Mon Mar 16 15:55:04 2020 +0800
+
+    Merge pull request #1 from hoyungcher/create-models
+    
+    Create models
+
+[33mcommit 1c5d5c90d5a20bf42d24b83480e40f112e212c9e[m
+Author: Yung Cher Ho <ycho527@hotmail.com>
+Date:   Mon Mar 16 15:53:06 2020 +0800
+
+    Crash-tested validations
+
+[33mcommit 23fdc856994b31f652d3f830b32f0d801cc8e4a0[m
+Author: Yung Cher Ho <ycho527@hotmail.com>
+Date:   Mon Mar 16 15:37:18 2020 +0800
+
+    Created core models, associations and validations
+
+[33mcommit 6dff605a0b5314301e04d5a042552131f5585f77[m
+Author: Yung Cher Ho <ycho527@hotmail.com>
+Date:   Mon Mar 16 14:52:59 2020 +0800
+
+    Initial commit with minimal template from https://github.com/lewagon/rails-templates
