@@ -1,5 +1,5 @@
 class HostsController < ApplicationController
   def show
-    @host = Host.find()
+    @host = Host.find(params[:id])
   end
 end
