@@ -1,8 +1,4 @@
-Rails.application.routes.draw do
-  get 'bookings/show'
-  get 'bookings/index'
-  get 'hosts/show'
-  get 'hosts/index'
+Rails.application.routes.draw do  
   root to: 'activities#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :activities, only: [ :index, :show ] do
