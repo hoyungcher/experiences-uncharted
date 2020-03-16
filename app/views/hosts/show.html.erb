@@ -1,2 +1,34 @@
-<h1>Hosts#show</h1>
-<p>Find me in app/views/hosts/show.html.erb</p>
+<h1><%= @host.first_name %></h1>
+<h2>Upcoming bookings</h2>
+<table>
+  <tr>
+    <th>Booking ID</th>
+    <th>Date</th>
+    <th>Activity</th>
+    <th>User</th>
+  </tr>
+  <% @host.bookings.each do |booking| %>
+    <tr>
+      <td><%= booking.id %></td>
+      <td><%= booking.date %></td>
+      <td><%= booking.activity %></td>
+      <td><a href="user/<%= booking.user.id %>"><%= booking.user %></a></td>
+    </tr>
+  <% end %>
+</table>
+
+<h2>Activities</h2>
+<table>
+  <tr>
+    <th>Activity</th>
+    <th>Location</th>
+    <th>Price per day</th>
+  </tr>
+  <% @host.activities.each do |activity| %>
+    <tr>
+      <td><a href="hosts/<%= activity.host.id %>/activities/<%= activity.id %>"><%= activity.name %><a/></td>
+      <td><%= activity.location %></td>
+      <td><%= activity.price_per_day %></td>
+    </tr>
+  <% end %>
+</table>
