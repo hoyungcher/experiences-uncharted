@@ -8,8 +8,8 @@
 require 'faker'
 
 puts "Destroying database..."
-Activity.destroy_all
 Booking.destroy_all
+Activity.destroy_all
 Host.destroy_all
 User.destroy_all
 
