@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :users, only: [ :show ] do
     resources :bookings, only: [ :index, :show ]
   end
-  resources :hosts, only: [:show] do
+  resources :hosts, only: [ :show ] do
     resources :bookings, only: [ :index, :show ]
     resources :activities, only: [ :index, :show ]
   end
