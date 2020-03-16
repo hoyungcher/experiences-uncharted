@@ -8,14 +8,16 @@
 require 'faker'
 
 puts "Destroying database..."
-Activity.destroy_all
 Booking.destroy_all
+Activity.destroy_all
 Host.destroy_all
 User.destroy_all
 
 puts "Starting seed..."
 
 activity = ["swimming", "hiking", "trekking", "bowling", "archery", "mountain-climbing", "sky-diving", "bungee jumping", "paragliding", "wakeboarding"]
+
+host_index = []
 
 10.times do |index| User.create!(
   email: "user#{index}@email.com",
@@ -38,15 +40,15 @@ end
   location: Faker::Address.country,
   price_per_day: rand(50..100),
   description: Faker::Movies::HitchhikersGuideToTheGalaxy.quote,
-  host: Host.all.sample
+  host: Host.find(Host.first.id + index)
   )
 end
 
 
-10.times do Booking.create!(
-  activity: Activity.find(rand(1..10)),
-  user: User.all.sample,
-  host: Host.all.sample,
+10.times do |index | Booking.create!(
+  activity: Activity.find(Activity.first.id + index),
+  user: User.find(User.first.id + index),
+  host: Host.find(Host.first.id + index),
   date: Date.today + rand(0..30)
   )
 end
