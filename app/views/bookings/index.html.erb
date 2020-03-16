@@ -1,0 +1,18 @@
+<h1>Your bookings</h1>
+
+<table>
+  <tr>
+    <th>Booking ID</th>
+    <th>Date</th>
+    <th>Activity</th>
+    <th>User</th>
+  </tr>
+  <% @bookings.each do |booking| %>
+    <tr>
+      <td><%= booking.id %></td>
+      <td><%= booking.date %></td>
+      <td><%= booking.activity %></td>
+      <td><a href="user/<%= booking.user.id %>"><%= booking.user %></a></td>
+    </tr>
+  <% end %>
+</table>
