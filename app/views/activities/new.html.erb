@@ -1,0 +1,9 @@
+<h1>Add an activity</h1>
+
+<%= simple_form_for [@host, @activity] do |f| %>
+  <%= f.input :name %>
+  <%= f.input :location %>
+  <%= f.input :price_per_day %>
+  <%= f.input :description %>
+  <%= f.submit "add an activity", class: "btn btn-primary" %>
+<% end %>

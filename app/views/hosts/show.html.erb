@@ -11,8 +11,8 @@
     <tr>
       <td><%= booking.id %></td>
       <td><%= booking.date %></td>
-      <td><%= booking.activity %></td>
-      <td><a href="user/<%= booking.user.id %>"><%= booking.user %></a></td>
+      <td><%= booking.activity.name %></td>
+      <td><a href="/users/<%= booking.user.id %>"><%= booking.user.first_name %> <%= booking.user.last_name %></a></td>
     </tr>
   <% end %>
 </table>
@@ -26,7 +26,7 @@
   </tr>
   <% @host.activities.each do |activity| %>
     <tr>
-      <td><a href="hosts/<%= activity.host.id %>/activities/<%= activity.id %>"><%= activity.name %><a/></td>
+      <td><a href="/hosts/<%= activity.host.id %>/activities/<%= activity.id %>"><%= activity.name %><a/></td>
       <td><%= activity.location %></td>
       <td><%= activity.price_per_day %></td>
     </tr>
