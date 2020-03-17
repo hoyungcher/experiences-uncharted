@@ -1,0 +1,3 @@
+<h2> You are booking for <%= Date.today %> </h2>
+
+<h3><%= link_to "Confirm Booking?", activity_user_bookings_path(@activity, @user, @booking), method: :post %></h3>
