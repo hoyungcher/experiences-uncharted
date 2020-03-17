@@ -2,5 +2,5 @@
 
 <% @bookings.each do |booking| %>
   <h5>On <%= booking.date %></h5>
-  <h3><%= @user.first_name %> is going <%= booking.activity.name %> || <%= link_to "Cancel Booking", activity_user_booking_path(booking), method: :delete, data: {confirm: 'Are you sure?'} %></h3>
+  <h3><%= @user.first_name %> is going <%= booking.activity.name %> || <%= link_to "Cancel Booking", activity_user_booking_path(booking.activity, booking.user, booking), method: :delete, data: {confirm: 'Are you sure?'} %></h3>
 <% end %>
