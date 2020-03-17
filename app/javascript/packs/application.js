@@ -1,5 +1,5 @@
 import "bootstrap";
-import "../components/calendar"
+
 import mapboxgl from 'mapbox-gl';
 
 
