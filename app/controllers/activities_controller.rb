@@ -2,6 +2,7 @@ class ActivitiesController < ApplicationController
   def index
     @activities = Activity.all
     @tags = Tag.all
+    @unshow_banner = false
   end
 
   def show
