@@ -13,7 +13,7 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <!-- <a class="navbar-brand" href="#">Experience Uncharted</a> -->
     <%= link_to root_path do %>
-      <i class="fas fa-home"></i>
+    <i class="fas fa-home"></i>
     <% end %>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -26,6 +26,10 @@
       </div>
     </div>
   </nav>
+
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+
   <%= yield %>
   <%= javascript_include_tag 'application' %>
 
