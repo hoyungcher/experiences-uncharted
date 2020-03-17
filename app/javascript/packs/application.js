@@ -1,4 +1,5 @@
 import "bootstrap";
+import mapboxgl from 'mapbox-gl';
 
 // code for tags
 const tags = document.querySelectorAll(".tag");
@@ -32,7 +33,7 @@ const showTagResults = () => {
 // code for sort by price
 const ascending = document.getElementById("ascending");
 const descending = document.getElementById("descending");
-ascending.addEventListener("click", (event) =>{
+ascending.addEventListener("click", (event) => {
   if (event.currentTarget.classList.contains("active")) {
     event.currentTarget.classList.remove("active");
   } else {
@@ -42,7 +43,7 @@ ascending.addEventListener("click", (event) =>{
   };
 });
 
-descending.addEventListener("click", (event) =>{
+descending.addEventListener("click", (event) => {
   if (event.currentTarget.classList.contains("active")) {
     event.currentTarget.classList.remove("active");
   } else {
@@ -81,6 +82,7 @@ const sortByDescending = () => {
     parent.appendChild(toSort[i]);
   }
 };
+
 
 
 
