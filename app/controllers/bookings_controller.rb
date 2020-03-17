@@ -28,8 +28,10 @@ class BookingsController < ApplicationController
     @booking = Booking.new(activity: @activity, host: @host, user: @user, date: @date)
     if @booking.save
       redirect_to user_bookings_path(@user)
-    else
-
     end
+  end
+
+  def destroy
+
   end
 end
