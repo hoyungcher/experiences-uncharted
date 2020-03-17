@@ -14,8 +14,12 @@
       <td><%= booking.activity.name %></td>
       <td><%= booking.host.first_name %></a></td>
       <td><%= booking.activity.location %></a></td>
-      <td><%= link_to "Cancel Booking", activity_user_booking_path(booking.activity, booking.user, booking), method: :delete, data: {confirm: "Are you sure?"}  %></td>
+      <% if booking.date > Date.today %>
+        <td>Experience Coming Up</td>
+        <td><%= link_to "Cancel Booking", activity_user_booking_path(booking.activity, booking.user, booking), method: :delete, data: {confirm: "Are you sure?"}  %></td>
+      <% end %>
       <% if booking.date < Date.today %>
+        <td>Experience Completed</td>
         <td><%= link_to "Add Review", new_user_booking_review_path(booking.user, booking) %></td>
       <% end %>
     </tr>
