@@ -2,7 +2,7 @@
 
 <% @activities.each do |activity| %>
   <h5><%= activity.host.first_name %> is hosting...</h5>
-  <h2><%= activity.name %></h2>
+  <h2><%= link_to activity.name.capitalize, activity_path(activity) %></h2>
   <p><strong>Location:</strong> <%= activity.location %></p>
   <p><strong>Description:</strong> <%= activity.description %></p>
   <p><strong>Price:</strong> $<%= activity.price_per_day %></p>
