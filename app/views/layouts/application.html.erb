@@ -10,23 +10,8 @@
   <%#= stylesheet_pack_tag 'application', media: 'all' %> <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <%= link_to root_path do %>
-      <i class="fas fa-home"></i>
-    <% end %>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <%= link_to "Register", new_user_path %>
 
-        <a class="nav-item nav-link" href="#">Login</a>
-      </div>
-    </div>
-  </nav>
-
-
+  <%= render 'shared/navbar' %>
   <%= render 'shared/flashes' %>
 <!--   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p> -->
