@@ -19,7 +19,7 @@ puts "Starting seed..."
 
 activities = ["swimming", "hiking", "trekking", "bowling", "archery", "mountain-climbing", "sky-diving", "bungee jumping", "paragliding", "wakeboarding"]
 
-tags = ["Art and culture", "Food and drink", "Entertainment", "Nature", "Sports", "Cooking", "Wellness"]
+tags = ["art-and-culture", "food-and-drink", "entertainment", "nature", "sports", "cooking", "wellness"]
 
 host_index = []
 
@@ -27,7 +27,7 @@ host_index = []
   email: "user#{index}@email.com",
   first_name: Faker::Name.first_name,
   last_name: Faker::Name.last_name,
-  encrypted_password: "pass#{rand(1..100)}"
+  password: "pass#{rand(1..100)}"
   )
 end
 
@@ -53,8 +53,9 @@ tags.each do |tag| Tag.create!(
   )
 end
 
-20.times do ActivityTag.create!(
-  activity: Activity.all.sample,
+Activity.all.each do |activity|
+  ActivityTag.create!(
+  activity: activity,
   tag: Tag.all.sample
   )
 end
@@ -100,7 +101,7 @@ puts "seed done"
 
 #   create_table "hosts", force: :cascade do |t|
 #     t.string "email"
-#     t.string "encrypted_password"
+#     t.string "password"
 #     t.string "first_name"
 #     t.string "last_name"
 #     t.datetime "created_at", null: false
@@ -109,7 +110,7 @@ puts "seed done"
 
 #   create_table "users", force: :cascade do |t|
 #     t.string "email"
-#     t.string "encrypted_password"
+#     t.string "password"
 #     t.string "first_name"
 #     t.string "last_name"
 #     t.datetime "created_at", null: false
