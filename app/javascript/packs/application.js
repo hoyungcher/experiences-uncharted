@@ -1,4 +1,5 @@
 import "bootstrap";
+import "../components/calendar"
 
 const tags = document.querySelectorAll(".tag");
 
