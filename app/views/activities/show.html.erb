@@ -4,8 +4,15 @@
 <h4>Activity Description:</h4>
 <p><%= @activity.description %></p>
 <p><strong>Price: </strong>$<%= @activity.price_per_day %></p>
+
 <% if current_user.nil? %>
 <%= link_to "Book Now!", new_user_session_path %>
 <% else %>
 <%= link_to "Book Now!", new_activity_user_booking_path(@activity, current_user) %>
 <% end %>
+
+<h4>Reviews</h4>
+<% @reviews.each do |review| %>
+  <p><%= review.content %></p>
+  <p><strong>Rating</strong>: <%= review.rating %>/5</p>
+  <p><strong>By</strong>: <%= review.user.first_name %></p>

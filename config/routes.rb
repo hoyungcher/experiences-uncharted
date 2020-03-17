@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :users, only: [ :show ] do
-    resources :bookings, only: [ :index, :show]
+    resources :bookings, only: [ :index, :show] do
+      resources :reviews, only: [ :new, :create ]
+    end
   end
   resources :hosts, only: [ :show ] do
     resources :activities, only: [ :index, :show, :new, :create ]
