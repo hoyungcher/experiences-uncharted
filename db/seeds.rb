@@ -17,11 +17,27 @@ User.destroy_all
 
 puts "Starting seed..."
 
-activities = ["swimming", "hiking", "trekking", "bowling", "archery", "mountain-climbing", "sky-diving", "bungee jumping", "paragliding", "wakeboarding"]
+activities = {"essential walking tour" => "art-and-culture", "hiking" => "nature", "italian cooking lesson" => "cooking", "local cuisine lesson" => "cooking", "farm visit" => "nature",
+              "wine tasting" => "food-and-drink", "tandem paragliding" => "sports", "graffiti tour" => "art-and-culture", "underground tour" => "art-and-culture",
+              "traditional sport" => "sports", "ballet show" => "entertainment", "circus show" => "entertainment"}
+
+locations = ["Buenos Aires", "Paris", "Florence", "Hong Kong", "Vancouver", "Singapore", "Brisbane", "Dubai", "Mexico City"]
 
 tags1 = ["art-and-culture", "food-and-drink", "entertainment", "nature", "sports", "cooking"]
 tags2 = ["budget", "mid-range", "luxury"]
 
+descriptions = {"essential walking tour" => "Through this tour you can have a general historical notion, but also the lifestyle of the residents. We will follow with history, culture, day to day, food, religion, curiosities and news. The local guide will be an open book about the city, and provide with the tour a general notion, but also a starting point for those who want to discover more deeply the old town and surroundings. The aim of the project is to provide a close and authentic experience, so the group will be limited to 10 participants maximum.",
+                "hiking" => "Located at the foot of the nearby mountain range, at only minutes from the center of town, the Sierras presents itself as an opportunity for those who are just starting in the world of mountaineering. Here you will enjoy a spectacular scenery that offers a magnificent view of the great capital city and the imposing Mountain Range as a reward for the hard efforts to reach it’s summit.",
+                "italian cooking lesson" => "Following a recipe could seem easy, but knowing the history and secrets of the dish, being aware of the origin of its ingredients is a real and fulfilling experience! We will relax drinking a good glass of wine and we will be able to see directly how to cook the best dish.",
+                "local cuisine lesson" => "Come discover the local cuisine, using locally sourced organic ingredients!",
+                "farm visit" => "You will visit the only dairy farm which has a pumpkin field as well",
+                "wine tasting" => "This half-day tour will allow you to discover the vineyards located just out of town with ease. You will get a chance to try the rare varieties of locally produced wine.",
+                "tandem paragliding" => "If you're adventurous, come try paragliding from the nearby peaks! ",
+                "graffiti tour" => "Our 2 hour walking tour will allow you to discover the vibrant street art around the city!",
+                "underground tour" => "Come discover the catacombs hidden under the bustling city that you never knew!",
+                "traditional sport" => "Come try your hand at unique sports not found anywhere else on the world!",
+                "ballet show" => "Visit the opera house for an amazing night of ballet!",
+                "circus show" => "For a limited time only, the Cirque du Soleil is coming to town. Don't miss their shows!"}
 
 host_index = []
 
@@ -36,8 +52,12 @@ def convert_price_to_tag(price)
   end
 end
 
+def convert_activity_to_tag(activity)
 
-10.times do |index| User.create!(
+end
+
+
+20.times do |index| User.create!(
   email: "user#{index}@email.com",
   first_name: Faker::Name.first_name,
   last_name: Faker::Name.last_name,
@@ -45,7 +65,7 @@ end
   )
 end
 
-10.times do |index| Host.create!(
+20.times do |index| Host.create!(
   email: "user#{index}@email.com",
   first_name: Faker::Name.first_name,
   last_name: Faker::Name.last_name,
@@ -53,11 +73,13 @@ end
   )
 end
 
-10.times do |index| Activity.create!(
-  name: activities.sample,
-  location: Faker::Address.country,
+20.times do |index|
+  activity_name = activities.keys.sample
+  Activity.create!(
+  name: activity_name,
+  location: locations.sample,
   price_per_day: rand(12..250),
-  description: Faker::Movies::HitchhikersGuideToTheGalaxy.quote,
+  description: descriptions[activity_name],
   host: Host.find(Host.first.id + index)
   )
 end
@@ -79,7 +101,7 @@ Activity.all.each do |activity|
   )
   ActivityTag.create!(
   activity: activity,
-  tag: Tag.find_by_name(tags1.sample)
+  tag: Tag.find_by_name(activities[activity.name])
   )
 end
 
