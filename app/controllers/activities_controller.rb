@@ -9,6 +9,7 @@ class ActivitiesController < ApplicationController
 
   def new
     @activity = Activity.new
+    @host = Host.find(params[:host_id])
   end
 
   def create
