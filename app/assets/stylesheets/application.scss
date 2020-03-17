@@ -7,7 +7,10 @@
 @import "bootstrap/scss/bootstrap";
 @import "font-awesome-sprockets";
 @import "font-awesome";
+@import 'bootstrap-datepicker';
 
 // Your CSS partials
 @import "components/index";
+@import "components/tag";
 @import "pages/index";
+

@@ -1,3 +1,6 @@
-<h2> You are booking for <%= Date.today %> </h2>
+<h2> You are booking <%= @activity.name %> with <%= @activity.host.first_name %> </h2>
 
-<h3><%= link_to "Confirm Booking?", activity_user_bookings_path(@activity, @user, @booking), method: :post %></h3>
+<%= simple_form_for [@activity, @user, @booking] do |f| %>
+  <%= f.input :date , as: :date %>
+  <%= f.button :submit %>
+<% end %>
