@@ -6,6 +6,7 @@
     <th>Activity</th>
     <th>Host</th>
     <th>Location</th>
+    <th></th>
   </tr>
   <% @bookings.each do |booking| %>
     <tr>
@@ -13,6 +14,7 @@
       <td><%= booking.activity.name %></td>
       <td><%= booking.host.first_name %></a></td>
       <td><%= booking.activity.location %></a></td>
+      <td><%= link_to "Cancel Booking", activity_user_booking_path(booking.activity, booking.user, booking), method: :delete, data: {confirm: "Are you sure?"}  %></td>
     </tr>
   <% end %>
 </table>
