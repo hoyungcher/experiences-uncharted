@@ -19,9 +19,23 @@ puts "Starting seed..."
 
 activities = ["swimming", "hiking", "trekking", "bowling", "archery", "mountain-climbing", "sky-diving", "bungee jumping", "paragliding", "wakeboarding"]
 
-tags = ["art-and-culture", "food-and-drink", "entertainment", "nature", "sports", "cooking", "wellness"]
+tags1 = ["art-and-culture", "food-and-drink", "entertainment", "nature", "sports", "cooking"]
+tags2 = ["budget", "mid-range", "luxury"]
+
 
 host_index = []
+
+def convert_price_to_tag(price)
+  case price
+  when 0..50
+    "budget"
+  when 51..100
+    "mid-range"
+  else
+    "luxury"
+  end
+end
+
 
 10.times do |index| User.create!(
   email: "user#{index}@email.com",
@@ -42,13 +56,18 @@ end
 10.times do |index| Activity.create!(
   name: activities.sample,
   location: Faker::Address.country,
-  price_per_day: rand(50..100),
+  price_per_day: rand(12..250),
   description: Faker::Movies::HitchhikersGuideToTheGalaxy.quote,
   host: Host.find(Host.first.id + index)
   )
 end
 
-tags.each do |tag| Tag.create!(
+tags1.each do |tag| Tag.create!(
+  name: tag
+  )
+end
+
+tags2.each do |tag| Tag.create!(
   name: tag
   )
 end
@@ -56,7 +75,11 @@ end
 Activity.all.each do |activity|
   ActivityTag.create!(
   activity: activity,
-  tag: Tag.all.sample
+  tag: Tag.find_by_name(convert_price_to_tag(activity.price_per_day))
+  )
+  ActivityTag.create!(
+  activity: activity,
+  tag: Tag.find_by_name(tags1.sample)
   )
 end
 
