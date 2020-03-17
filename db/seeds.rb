@@ -27,7 +27,7 @@ host_index = []
   email: "user#{index}@email.com",
   first_name: Faker::Name.first_name,
   last_name: Faker::Name.last_name,
-  password: "pass#{rand(1..100)}"
+  encrypted_password: "pass#{rand(1..100)}"
   )
 end
 
@@ -100,7 +100,7 @@ puts "seed done"
 
 #   create_table "hosts", force: :cascade do |t|
 #     t.string "email"
-#     t.string "password"
+#     t.string "encrypted_password"
 #     t.string "first_name"
 #     t.string "last_name"
 #     t.datetime "created_at", null: false
@@ -109,7 +109,7 @@ puts "seed done"
 
 #   create_table "users", force: :cascade do |t|
 #     t.string "email"
-#     t.string "password"
+#     t.string "encrypted_password"
 #     t.string "first_name"
 #     t.string "last_name"
 #     t.datetime "created_at", null: false
