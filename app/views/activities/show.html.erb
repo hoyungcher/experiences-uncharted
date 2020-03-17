@@ -5,3 +5,11 @@
 <p><%= @activity.description %></p>
 <p><strong>Price: </strong>$<%= @activity.price_per_day %></p>
 <%= link_to "Book Now!", activities_path %>
+
+<h4>Reviews</h4>
+
+<% @reviews.each do |review| %>
+  <p><%= review.content %></p>
+  <p><strong>Rating</strong>: <%= review.rating %>/5</p>
+  <p><strong>By</strong>: <%= review.user.first_name %></p>
+<% end %>
