@@ -6,18 +6,30 @@ tags.forEach((tag) => {
   tag.addEventListener("click", (event) =>{
     if (event.currentTarget.classList.contains("active")) {
       tag.classList.remove("active");
-      const selectedActivities = document.querySelectorAll(`.activity.${event.currentTarget.dataset.tag}`);
-      const allActivities = document.querySelectorAll(".activity");
-      selectedActivities.forEach((activity) => {activity.style.display = "none"});
-      allActivities.forEach((activity) => {activity.style.display = "block"});
+      showTagResults();
     } else {
       tag.classList.add("active");
-      const selectedActivities = document.querySelectorAll(`.activity.${event.currentTarget.dataset.tag}`);
-      const allActivities = document.querySelectorAll(".activity");
-      allActivities.forEach((activity) => {activity.style.display = "none"});
-      selectedActivities.forEach((activity) => {activity.style.display = "block"});
+      showTagResults();
     };
   });
 });
 
-    // console.log("Art and culture".toLowerCase().replace(/ /g, "-"))
+
+const showTagResults = () => {
+  const activeTags = Array.from(document.querySelectorAll(".tag.active")).map(x => x.dataset.tag);
+  if (activeTags.length === 0) {
+    const allActivities = document.querySelectorAll(".activity");
+    allActivities.forEach((activity) => {activity.style.display = "block"});
+  } else {
+    const allActivities = document.querySelectorAll(".activity");
+    allActivities.forEach((activity) => {activity.style.display = "none"});
+    const selectedActivities = document.querySelectorAll(`.activity.${activeTags.join('.')}`);
+    selectedActivities.forEach((activity) => {activity.style.display = "block"});
+  };
+}
+
+
+
+
+
+
