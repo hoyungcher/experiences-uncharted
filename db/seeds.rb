@@ -27,7 +27,7 @@ host_index = []
   email: "user#{index}@email.com",
   first_name: Faker::Name.first_name,
   last_name: Faker::Name.last_name,
-  password: "pass#{rand(1..100)}"
+  password: "pass#{rand(10..100)}"
   )
 end
 
@@ -35,7 +35,7 @@ end
   email: "user#{index}@email.com",
   first_name: Faker::Name.first_name,
   last_name: Faker::Name.last_name,
-  password: "pass#{rand(1..100)}"
+  password: "pass#{rand(10..100)}"
   )
 end
 
