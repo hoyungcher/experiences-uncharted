@@ -1,24 +1,23 @@
 <h1>All Activities (Home)</h1>
 
-<div class="container">
-<!--   <button class="tag">Art and culture</button>
-  <button class="tag">Food and drink</button>
-  <button class="tag">Entertainment</button>
-  <button class="tag">Nature</button>
-  <button class="tag">Cooking</button>
-  <button class="tag">Wellness</button>
-  <button class="tag">Sports</button> -->
+<div class="tag-container">
   <% @tags.each do |tag| %>
     <button class="tag" data-tag= "<%= tag.name %>"><%= tag.name.gsub("-"," ").capitalize %></button>
   <% end %>
 </div>
-
-<% @activities.each do |activity| %>
-  <div class="activity <% activity.tags.each do |tag| %><%= tag.name %> <% end %>">
-    <h5><%= activity.host.first_name %> is hosting...</h5>
-    <h2><%= link_to activity.name.capitalize, activity_path(activity) %></h2>
-    <p><strong>Location:</strong> <%= activity.location %></p>
-    <p><strong>Description:</strong> <%= activity.description %></p>
-    <p><strong>Price:</strong> $<%= activity.price_per_day %></p>
-  </div>
-<% end %>
+<div class="sort-container">
+  Sort by:
+  <button id="ascending" class="sort">Ascending</button>
+  <button id="descending" class="sort">Descending</button>
+</div>
+<div class="activities-container">
+  <% @activities.each do |activity| %>
+    <div class="activity <% activity.tags.each do |tag| %><%= tag.name %> <% end %>" data-price="<%= activity.price_per_day %>">
+      <h5><%= activity.host.first_name %> is hosting...</h5>
+      <h2><%= link_to activity.name.capitalize, activity_path(activity) %></h2>
+      <p><strong>Location:</strong> <%= activity.location %></p>
+      <p><strong>Description:</strong> <%= activity.description %></p>
+      <p><strong>Price:</strong> $<%= activity.price_per_day %></p>
+    </div>
+  <% end %>
+</div>

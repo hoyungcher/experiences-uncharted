@@ -1,0 +1,15 @@
+.sort {
+  background-color: #FFFFFF;
+  padding: 4px 12px;
+  margin: 4px 8px;
+  border-radius: 20px;
+  border: 1px solid grey;
+}
+
+.sort.active {
+  background-color: rgb(230,230,230);
+  padding: 4px 12px;
+  margin: 4px 8px;
+  border-radius: 20px;
+  border: 1px solid black;
+}

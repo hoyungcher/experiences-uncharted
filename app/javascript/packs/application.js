@@ -1,5 +1,6 @@
 import "bootstrap";
 
+// code for tags
 const tags = document.querySelectorAll(".tag");
 
 tags.forEach((tag) => {
@@ -28,8 +29,58 @@ const showTagResults = () => {
   };
 }
 
+// code for sort by price
+const ascending = document.getElementById("ascending");
+const descending = document.getElementById("descending");
+ascending.addEventListener("click", (event) =>{
+  if (event.currentTarget.classList.contains("active")) {
+    event.currentTarget.classList.remove("active");
+  } else {
+    event.currentTarget.classList.add("active");
+    descending.classList.remove("active");
+    sortByAscending();
+  };
+});
 
+descending.addEventListener("click", (event) =>{
+  if (event.currentTarget.classList.contains("active")) {
+    event.currentTarget.classList.remove("active");
+  } else {
+    event.currentTarget.classList.add("active");
+    ascending.classList.remove("active");
+    sortByDescending();
+  };
+});
 
+const sortByAscending = () => {
+  let toSort = document.querySelector('.activities-container').children;
+  toSort = Array.prototype.slice.call(toSort, 0);
+  toSort.sort(function(a, b) {
+    let aord = +parseInt(a.dataset.price);
+    let bord = +parseInt(b.dataset.price);
+    return aord - bord;
+  });
+  let parent = document.querySelector('.activities-container');
+  parent.innerHTML = "";
+  for(let i = 0, l = toSort.length; i < l; i++) {
+    parent.appendChild(toSort[i]);
+  }
+};
+
+const sortByDescending = () => {
+  let toSort = document.querySelector('.activities-container').children;
+  toSort = Array.prototype.slice.call(toSort, 0);
+  toSort.sort(function(a, b) {
+    let aord = +parseInt(a.dataset.price);
+    let bord = +parseInt(b.dataset.price);
+    return bord - aord;
+  });
+  let parent = document.querySelector('.activities-container');
+  parent.innerHTML = "";
+  for(let i = 0, l = toSort.length; i < l; i++) {
+    parent.appendChild(toSort[i]);
+  }
+};
 
 
 
