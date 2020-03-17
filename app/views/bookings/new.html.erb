@@ -1,6 +1,19 @@
 <h2> You are booking <%= @activity.name %> with <%= @activity.host.first_name %> </h2>
 
-<%= simple_form_for [@activity, @user, @booking] do |f| %>
-  <%= f.input :date , as: :date %>
-  <%= f.button :submit %>
+<p class='errors'></p>
+<%= month_calendar do |date| %>
+  <%= date %>
 <% end %>
+
+<%= simple_form_for [@activity, @user, @booking] do |f| %>
+  <%= f.input :date, as: :hidden, class: "date-hidden" %>
+  <%= f.button :submit, class: 'date-submit' %>
+<% end %>
+
+
+<div class='hidden'>
+<h2>Taken Dates</h2>
+<% @activity.bookings.each do |booking| %>
+<p class="taken-dates"><%= booking.date %></p>
+<% end %>
+</div>

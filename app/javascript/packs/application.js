@@ -1,5 +1,7 @@
 import "bootstrap";
+import "../components/calendar"
 import mapboxgl from 'mapbox-gl';
+
 
 // code for tags
 const tags = document.querySelectorAll(".tag");

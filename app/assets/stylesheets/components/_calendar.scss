@@ -1,0 +1,36 @@
+.prev-month {
+  visibility: hidden;
+}
+
+.next-month {
+  visibility: hidden;
+}
+
+.date-active {
+  background-color: green;
+}
+
+.calendar-heading {
+  display: flex;
+  justify-content: center;
+}
+
+.calendar-heading a, .calendar-heading span {
+  margin: 10px 20px;
+}
+
+.past.current-month, .today {
+  color: grey;
+}
+
+.future.current-month:hover {
+  cursor: pointer;
+}
+
+.date-busy {
+  color: grey;
+}
+
+.hidden {
+  display: none;
+}
