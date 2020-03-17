@@ -8,6 +8,8 @@
 require 'faker'
 
 puts "Destroying database..."
+ActivityTag.destroy_all
+Tag.destroy_all
 Booking.destroy_all
 Activity.destroy_all
 Host.destroy_all
@@ -15,7 +17,9 @@ User.destroy_all
 
 puts "Starting seed..."
 
-activity = ["swimming", "hiking", "trekking", "bowling", "archery", "mountain-climbing", "sky-diving", "bungee jumping", "paragliding", "wakeboarding"]
+activities = ["swimming", "hiking", "trekking", "bowling", "archery", "mountain-climbing", "sky-diving", "bungee jumping", "paragliding", "wakeboarding"]
+
+tags = ["Art and culture", "Food and drink", "Entertainment", "Nature", "Sports", "Cooking", "Wellness"]
 
 host_index = []
 
@@ -36,11 +40,22 @@ end
 end
 
 10.times do |index| Activity.create!(
-  name: activity.sample,
+  name: activities.sample,
   location: Faker::Address.country,
   price_per_day: rand(50..100),
   description: Faker::Movies::HitchhikersGuideToTheGalaxy.quote,
   host: Host.find(Host.first.id + index)
+  )
+end
+
+tags.each do |tag| Tag.create!(
+  name: tag
+  )
+end
+
+20.times do ActivityTag.create!(
+  activity: Activity.all.sample,
+  tag: Tag.all.sample
   )
 end
 

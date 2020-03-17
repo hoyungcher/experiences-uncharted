@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_16_072211) do
+ActiveRecord::Schema.define(version: 2020_03_17_022958) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,15 @@ ActiveRecord::Schema.define(version: 2020_03_16_072211) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["host_id"], name: "index_activities_on_host_id"
+  end
+
+  create_table "activity_tags", force: :cascade do |t|
+    t.bigint "activity_id"
+    t.bigint "tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["activity_id"], name: "index_activity_tags_on_activity_id"
+    t.index ["tag_id"], name: "index_activity_tags_on_tag_id"
   end
 
   create_table "bookings", force: :cascade do |t|
@@ -47,6 +56,12 @@ ActiveRecord::Schema.define(version: 2020_03_16_072211) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "password"
@@ -57,6 +72,8 @@ ActiveRecord::Schema.define(version: 2020_03_16_072211) do
   end
 
   add_foreign_key "activities", "hosts"
+  add_foreign_key "activity_tags", "activities"
+  add_foreign_key "activity_tags", "tags"
   add_foreign_key "bookings", "activities"
   add_foreign_key "bookings", "hosts"
   add_foreign_key "bookings", "users"
