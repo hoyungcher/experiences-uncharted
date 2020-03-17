@@ -4,4 +4,8 @@
 <h4>Activity Description:</h4>
 <p><%= @activity.description %></p>
 <p><strong>Price: </strong>$<%= @activity.price_per_day %></p>
-<%= link_to "Book Now!", activities_path %>
+<% if current_user.nil? %>
+<%= link_to "Book Now!", new_user_session_path %>
+<% else %>
+<%= link_to "Book Now!", new_activity_user_booking_path(@activity, current_user) %>
+<% end %>
