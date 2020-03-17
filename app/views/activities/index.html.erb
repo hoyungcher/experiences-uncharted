@@ -1,17 +1,20 @@
 <h1>All Activities (Home)</h1>
 
 <div class="container">
-  <button class="tag">Art and culture</button>
+<!--   <button class="tag">Art and culture</button>
   <button class="tag">Food and drink</button>
   <button class="tag">Entertainment</button>
   <button class="tag">Nature</button>
   <button class="tag">Cooking</button>
   <button class="tag">Wellness</button>
-  <button class="tag">Sports</button>
+  <button class="tag">Sports</button> -->
+  <% @tags.each do |tag| %>
+    <button class="tag" data-tag= "<%= tag.name %>"><%= tag.name.gsub("-"," ").capitalize %></button>
+  <% end %>
 </div>
 
 <% @activities.each do |activity| %>
-  <div class="activity <% activity.tags.each do |tag| %><%= tag.name.join("-") %> <% end %>">
+  <div class="activity <% activity.tags.each do |tag| %><%= tag.name %> <% end %>">
     <h5><%= activity.host.first_name %> is hosting...</h5>
     <h2><%= link_to activity.name.capitalize, activity_path(activity) %></h2>
     <p><strong>Location:</strong> <%= activity.location %></p>
