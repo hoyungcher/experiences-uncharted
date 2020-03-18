@@ -4,8 +4,8 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="navbar-collapse collapse justify-content-between" id="navbarNavAltMarkup">
-      <%= link_to root_path do %>
-        <i class="fas fa-home mx-1"></i>
+      <%= link_to root_path, class: "mx-3 nav-btn" do %>
+        <i class="fas fa-mountain"></i> Home
       <% end %>
       <% if user_signed_in? %>
       <div class="navbar-nav">
