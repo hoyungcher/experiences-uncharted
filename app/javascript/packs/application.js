@@ -1,8 +1,5 @@
 import "bootstrap";
 
-// import mapboxgl from 'mapbox-gl';
-
-
 // code for tags
 const tags = document.querySelectorAll(".tag");
 
@@ -30,7 +27,9 @@ const showTagResults = () => {
   const activeTags = Array.from(document.querySelectorAll(".tag.active")).map(x => x.dataset.tag);
   if (activeTags.length === 0) {
     const allActivities = document.querySelectorAll(".activity");
-    allActivities.forEach((activity) => {activity.style.display = "block"});
+    allActivities.forEach((activity) => {
+      activity.style.display = "block"
+    });
   } else {
     const allActivities = document.querySelectorAll(".activity");
     allActivities.forEach((activity) => {activity.style.display = "none"});
@@ -71,7 +70,7 @@ const showCityResults = () => {
     allActivities.forEach((activity) => {activity.style.display = "none"});
     const selectedActivities = document.querySelectorAll(`[data-city*="${activeCity.id}"]`);
     selectedActivities.forEach((activity) => {activity.style.display = "block"});
-    document.getElementById("tag-list").scrollIntoView();
+    document.getElementById("tag-list").scrollIntoView({ behavior: 'smooth', block: 'start' });
   } else {
     const allActivities = document.querySelectorAll(".activity");
     allActivities.forEach((activity) => {activity.style.display = "block"});
@@ -132,7 +131,3 @@ const sortByDescending = () => {
     parent.appendChild(toSort[i]);
   }
 };
-
-
-
-
