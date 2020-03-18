@@ -29,7 +29,7 @@
 <div class="activities-container">
   <div class="row">
     <% @activities.each do |activity| %>
-    <div class="col-md-6 col-lg-4 activity <% activity.tags.each do |tag| %><%= tag.name %> <% end %>" data-price="<%= activity.price_per_person %>" data-city="<%= activity.city.downcase %>">
+    <div class="col-md-6 col-lg-4 activity <% activity.tags.each do |tag| %><%= tag.name %> <% end %>" data-price="<%= activity.price_per_person %>" data-city="<%= activity.city.downcase %>" style="display: block;">
       <div class="card-trip">
         <img src="https://source.unsplash.com/1600x900/?<%= activity.name %><%= activity.city %>" />
         <div class="card-trip-infos">
