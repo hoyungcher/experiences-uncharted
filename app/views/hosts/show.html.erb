@@ -1,34 +1,22 @@
-<h1><%= @host.first_name %></h1>
+<h1>Welcome <%= @host.first_name %>!</h1>
+<p><%= link_to "Add a new activity!", new_host_activity_path(@host), class: "btn-main" %></p>
+<h2>Your active activities:</h2>
+<% @host.activities.each do |activity| %>
+<p><%= link_to activity.name.capitalize, activity_path(activity) %> || Edit || Delete </p>
+<% end %>
 <h2>Upcoming bookings</h2>
-<table>
-  <tr>
-    <th>Booking ID</th>
-    <th>Date</th>
-    <th>Activity</th>
-    <th>User</th>
-  </tr>
-  <% @host.bookings.each do |booking| %>
-    <tr>
-      <td><%= booking.id %></td>
-      <td><%= booking.date %></td>
-      <td><%= booking.activity.name %></td>
-      <td><a href="/users/<%= booking.user.id %>"><%= booking.user.first_name %> <%= booking.user.last_name %></a></td>
-    </tr>
-  <% end %>
-</table>
+<% @host.bookings.each do |booking| %>
+  <% if booking.date > Date.today %>
+    <div class="card-product">
+      <img src=<%= "https://source.unsplash.com/1600x900/?#{booking.activity.name}" %> />
+      <div class="card-product-infos">
+        <h2>Guest: <%= booking.user.first_name %> <%= booking.user.last_name %></h2>
+        <p>Date: <%= booking.date %> || Group Size: <%= booking.group_size %></p>
+        <p><%= link_to booking.activity.name.capitalize, activity_path(booking.activity) %> || <%= booking.activity.city %></p>
+        <p><%= link_to "Cancel Booking", activity_user_booking_path(booking.activity, booking.user, booking), method: :delete,  data: {:confirm => 'Are you sure?'} %></p>
+      </div>
+    </div>
+  </div>
+<% end %>
+<% end %>
 
-<h2>Activities</h2>
-<table>
-  <tr>
-    <th>Activity</th>
-    <th>Location</th>
-    <th>Price per day</th>
-  </tr>
-  <% @host.activities.each do |activity| %>
-    <tr>
-      <td><a href="/hosts/<%= activity.host.id %>/activities/<%= activity.id %>"><%= activity.name %><a/></td>
-      <td><%= activity.location %></td>
-      <td><%= activity.price_per_day %></td>
-    </tr>
-  <% end %>
-</table>
