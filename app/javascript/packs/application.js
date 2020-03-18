@@ -1,6 +1,6 @@
 import "bootstrap";
 
-import mapboxgl from 'mapbox-gl';
+// import mapboxgl from 'mapbox-gl';
 
 
 // code for tags
@@ -12,11 +12,18 @@ tags.forEach((tag) => {
       tag.classList.remove("active");
       showTagResults();
     } else {
+      disableAllActiveTags();
       tag.classList.add("active");
       showTagResults();
     };
   });
 });
+
+const disableAllActiveTags = () => {
+  tags.forEach((tag) => {
+    tag.classList.remove("active");
+  })
+};
 
 
 const showTagResults = () => {
@@ -30,11 +37,15 @@ const showTagResults = () => {
     const selectedActivities = document.querySelectorAll(`.activity.${activeTags.join('.')}`);
     selectedActivities.forEach((activity) => {activity.style.display = "block"});
   };
-}
+};
+
+
+
+
 
 // code for sort by price
-const ascending = document.getElementById("ascending");
-const descending = document.getElementById("descending");
+const ascending = document.getElementById("price-ascending");
+const descending = document.getElementById("price-descending");
 ascending.addEventListener("click", (event) => {
   if (event.currentTarget.classList.contains("active")) {
     event.currentTarget.classList.remove("active");

@@ -1,14 +1,28 @@
 <h1 class="text-center">Find an Experience</h1>
 
+<div class="scrolling-wrapper">
+  <% @cities.each do |city| %>
+    <div class="city-card" id="<%= city %>">
+      <h4 class="city-name"><%= city.upcase %></h4>
+      <img src="https://source.unsplash.com/200x300/?<%= city %>" >
+    </div>
+  <% end %>
+</div>
+
+<br>
+
 <div class="tag-container">
   <% @tags.each do |tag| %>
   <button class="tag" data-tag= "<%= tag.name %>"><%= tag.name.gsub("-"," ").capitalize %></button>
   <% end %>
 </div>
+
+<br>
+
 <div class="sort-container">
   Sort by:
-  <button id="ascending" class="sort">Ascending</button>
-  <button id="descending" class="sort">Descending</button>
+  <button id="price-ascending" class="sort">Lowest Price First</button>
+  <button id="price-descending" class="sort">Highest Price First</button>
 </div>
 
 
