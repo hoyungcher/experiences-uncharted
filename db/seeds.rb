@@ -107,8 +107,7 @@ Activity.all.each do |activity|
   )
 end
 
-
-10.times do |index | Booking.create!(
+20.times do |index| Booking.create!(
   activity: Activity.find(Activity.first.id + index),
   user: User.find(User.first.id + index),
   host: Host.find(Host.first.id + index),
@@ -116,6 +115,27 @@ end
   group_size: rand(1..9)
   )
 end
+
+review1 = Review.create!(
+  content: "Great activity! Loved our guide - was super friendly and knowledgeable.",
+  rating: 5,
+  user: User.find(User.first.id),
+  booking: Booking.find(Booking.first.id)
+  )
+
+review2 = Review.create!(
+  content: "Would recommend to anyone looking for some adventure.",
+  rating: 4,
+  user: User.find(User.first.id + 1),
+  booking: Booking.find(Booking.first.id)
+  )
+
+review3 = Review.create!(
+  content: "Enjoyed this, but probably shouldn't have gone out during this time because WE SHOULD ALL PRACTICE SOCIAL DISTANCING.",
+  rating: 5,
+  user: User.find(User.first.id + 2),
+  booking: Booking.find(Booking.first.id)
+  )
 
 puts "seed done"
 

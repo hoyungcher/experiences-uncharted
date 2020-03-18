@@ -33,29 +33,35 @@
   </div>
 
   <% if current_user.nil? %>
-  <%= link_to "Book Now!", new_user_session_path, class: "book-button" %>
+  <%= link_to "Book Now!", new_user_session_path, class: "btn-main" %>
   <% else %>
-  <%= link_to "Book Now!", new_activity_user_booking_path(@activity, current_user), class: "book-button" %>
+  <%= link_to "Book Now!", new_activity_user_booking_path(@activity, current_user), class: "btn-main" %>
   <% end %>
 </div>
 
 <div class="activity-description">
-<h4>What you'll do:</h4>
-<p><%= @activity.description %></p>
+  <h4>What you'll do:</h4>
+  <p><%= @activity.description %></p>
 </div>
 
-<div class="activity-reviews">
-  <h4>Reviews</h4>
-  <% if @reviews.empty? %>
-  <p>No reviews for this activity yet!</p>
-  <% else %>
-    <% @reviews.each do |review| %>
-      <p><%= review.content %></p>
-      <p><strong>Rating</strong>: <%= review.rating %>/5</p>
-      <p><strong>By</strong>: <%= review.user.first_name %></p>
-    <% end %>
-  <% end %>
+<h4>Reviews</h4>
+<% if @reviews.empty? %>
+<p>No reviews for this activity yet!</p>
+<% else %>
+<% @reviews.each do |review| %>
+<div class="card-review">
+  <div class="card-review-details">
+    <h2 class="card-review-stars">
+      <% review.rating.times do %>
+        <i class="fas fa-star"></i>
+      <% end %>
+    </h2>
+    <p><%= review.content %></p>
+  </div>
 </div>
+<% end %>
+<% end %>
+
 <div id="map" style="height: 300px; width: 600px"></div>
 
 

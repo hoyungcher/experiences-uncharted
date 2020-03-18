@@ -2,6 +2,19 @@
   background-color: teal;
   color: white;
   border-radius: 50px;
-  margin: 8px 0;
   padding: 8px 24px;
+}
+
+
+// .book-btn {
+//   background-color: teal;
+//   color: white;
+//   border-radius: 50px;
+//   margin: 8px 0;
+//   padding: 8px 24px;
+// }
+
+.btn-main:hover {
+  color: $offwhite;
+  text-decoration: none;
 }
