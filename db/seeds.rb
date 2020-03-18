@@ -116,6 +116,30 @@ end
   )
 end
 
+booking1 = Booking.create!(
+  activity: Activity.find(Activity.first.id),
+  user: User.find(User.first.id),
+  host: Activity.find(Activity.first.id).host,
+  date: Date.today - 2,
+  group_size: 4
+  )
+
+booking2 = Booking.create!(
+  activity: Activity.find(Activity.first.id),
+  user: User.find(User.first.id),
+  host: Activity.find(Activity.first.id).host,
+  date: Date.today - 5,
+  group_size: 4
+  )
+
+booking3 = Booking.create!(
+  activity: Activity.find(Activity.first.id),
+  user: User.find(User.first.id),
+  host: Activity.find(Activity.first.id).host,
+  date: Date.today - 7,
+  group_size: 4
+  )
+
 review1 = Review.create!(
   content: "Great activity! Loved our guide - was super friendly and knowledgeable.",
   rating: 5,
