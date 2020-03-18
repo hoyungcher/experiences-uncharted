@@ -4,6 +4,7 @@ const table = document.querySelector('table');
 const bookingDate = document.getElementById('booking_date');
 const button = document.querySelector('.date-submit');
 const taken = document.querySelectorAll('.taken-dates');
+const groupSize = document.getElementById('booking_group_size')
 
 let dateSelected = false;
 let error;
