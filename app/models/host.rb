@@ -1,8 +1,6 @@
 class Host < ApplicationRecord
   has_many :bookings
   has_many :activities
-  validates :first_name, presence: true
-  validates :last_name, presence: true
 
   validates :email, presence: true, uniqueness: true, format: { with: /\A\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}\z/ }
   validates :encrypted_password, presence: true
