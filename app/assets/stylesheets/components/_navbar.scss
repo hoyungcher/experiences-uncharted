@@ -1,15 +1,23 @@
-.navbar-lewagon {
-  justify-content: space-between;
-  background: white;
+.navbar {
+  position: sticky;
+  top: 0;
+  height: 56px;
+  z-index: 999;
+  font-size: 18px;
 }
 
-.navbar-lewagon .navbar-collapse {
-  flex-grow: 0;
-}
+// .navbar-lewagon {
+//   justify-content: space-between;
+//   background: white;
+// }
 
-.navbar-lewagon .navbar-brand img {
-  width: 40px;
-}
+// .navbar-lewagon .navbar-collapse {
+//   flex-grow: 0;
+// }
+
+// .navbar-lewagon .navbar-brand img {
+//   width: 40px;
+// }
 
 .navbar.navbar-light {
   display: flex;
@@ -18,9 +26,10 @@
 
 .nav-btn {
   text-decoration: none;
+  color: $black;
 }
 
 .nav-btn:hover {
   text-decoration: none;
-  weight: bolder;
+  color: teal;
 }
