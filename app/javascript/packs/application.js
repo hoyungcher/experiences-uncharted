@@ -39,7 +39,44 @@ const showTagResults = () => {
   };
 };
 
+//code for cities
 
+const cities = document.querySelectorAll(".city-card");
+
+cities.forEach((city) => {
+  city.addEventListener("click", (event) =>{
+    if (event.currentTarget.classList.contains("active")) {
+      city.classList.remove("active");
+      showCityResults();
+    } else {
+      disableAllActiveCities();
+      city.classList.add("active");
+      showCityResults();
+    };
+  });
+});
+
+const disableAllActiveCities = () => {
+  cities.forEach((city) => {
+    city.classList.remove("active");
+  })
+};
+
+
+const showCityResults = () => {
+  const activeCity = document.querySelector(".city-card.active")
+  console.log(activeCity);
+  if (activeCity) {
+    const allActivities = document.querySelectorAll(".activity");
+    allActivities.forEach((activity) => {activity.style.display = "none"});
+    const selectedActivities = document.querySelectorAll(`[data-city*="${activeCity.id}"]`);
+    selectedActivities.forEach((activity) => {activity.style.display = "block"});
+    document.getElementById("tag-list").scrollIntoView();
+  } else {
+    const allActivities = document.querySelectorAll(".activity");
+    allActivities.forEach((activity) => {activity.style.display = "block"});
+  };
+};
 
 
 
@@ -67,14 +104,14 @@ descending.addEventListener("click", (event) => {
 });
 
 const sortByAscending = () => {
-  let toSort = document.querySelector('.activities-container').children;
+  let toSort = document.querySelector('.activities-container .row').children;
   toSort = Array.prototype.slice.call(toSort, 0);
   toSort.sort(function(a, b) {
     let aord = +parseInt(a.dataset.price);
     let bord = +parseInt(b.dataset.price);
     return aord - bord;
   });
-  let parent = document.querySelector('.activities-container');
+  let parent = document.querySelector('.activities-container .row');
   parent.innerHTML = "";
   for(let i = 0, l = toSort.length; i < l; i++) {
     parent.appendChild(toSort[i]);
@@ -82,14 +119,14 @@ const sortByAscending = () => {
 };
 
 const sortByDescending = () => {
-  let toSort = document.querySelector('.activities-container').children;
+  let toSort = document.querySelector('.activities-container .row').children;
   toSort = Array.prototype.slice.call(toSort, 0);
   toSort.sort(function(a, b) {
     let aord = +parseInt(a.dataset.price);
     let bord = +parseInt(b.dataset.price);
     return bord - aord;
   });
-  let parent = document.querySelector('.activities-container');
+  let parent = document.querySelector('.activities-container .row');
   parent.innerHTML = "";
   for(let i = 0, l = toSort.length; i < l; i++) {
     parent.appendChild(toSort[i]);
