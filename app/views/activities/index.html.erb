@@ -2,7 +2,7 @@
 
 <div class="tag-container">
   <% @tags.each do |tag| %>
-    <button class="tag" data-tag= "<%= tag.name %>"><%= tag.name.gsub("-"," ").capitalize %></button>
+  <button class="tag" data-tag= "<%= tag.name %>"><%= tag.name.gsub("-"," ").capitalize %></button>
   <% end %>
 </div>
 <div class="sort-container">
@@ -10,16 +10,27 @@
   <button id="ascending" class="sort">Ascending</button>
   <button id="descending" class="sort">Descending</button>
 </div>
+
+
 <div class="activities-container">
-  <% @activities.each do |activity| %>
-    <div class="activity <% activity.tags.each do |tag| %><%= tag.name %> <% end %>" data-price="<%= activity.price_per_person %>">
-      <h5><%= activity.host.first_name %> is hosting...</h5>
-      <h2><%= link_to activity.name.capitalize, activity_path(activity) %></h2>
-      <p><strong>City:</strong> <%= activity.city %></p>
-      <p><strong>Description:</strong> <%= activity.description %></p>
-      <p><strong>Price per person:</strong> $<%= activity.price_per_person %></p>
+  <div class="row">
+    <% @activities.each do |activity| %>
+    <div class="col-md-6 col-lg-4 activity <% activity.tags.each do |tag| %><%= tag.name %> <% end %>" data-price="<%= activity.price_per_person %>">
+      <div class="card-trip">
+        <img src="https://source.unsplash.com/1600x900/?<%= activity.name %><%= activity.city %>" />
+        <div class="card-trip-infos">
+          <div>
+            <h2><%= link_to activity.name.capitalize, activity_path(activity) %></h2>
+            <p><%= activity.city %></p>
+          </div>
+          <h2 class="card-trip-pricing">$<%= activity.price_per_person %> per person</h2>
+          <!-- <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-trip-user avatar-bordered" /> -->
+        </div>
+      </div>
     </div>
-  <% end %>
+    <% end %>
+  </div>
+</div>
 </div>
 
 <!-- <script>
