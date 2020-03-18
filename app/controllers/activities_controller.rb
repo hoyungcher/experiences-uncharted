@@ -3,6 +3,8 @@ class ActivitiesController < ApplicationController
     @activities = Activity.all
     @tags = Tag.all
     @unshow_banner = false
+    @cities = Activity.select(:city).map(&:city).uniq
+
   end
 
   def show
