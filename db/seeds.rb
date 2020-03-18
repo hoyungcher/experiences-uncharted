@@ -22,7 +22,7 @@ activities = {"essential walking tour" => "art-and-culture", "hiking" => "nature
               "wine tasting" => "food-and-drink", "tandem paragliding" => "sports", "graffiti tour" => "art-and-culture", "underground tour" => "art-and-culture",
               "traditional sport" => "sports", "ballet show" => "entertainment", "circus show" => "entertainment"}
 
-locations = ["Buenos Aires", "Paris", "Florence", "Hong Kong", "Vancouver", "Singapore", "Brisbane", "Dubai", "Mexico City"]
+locations = ["Bali", "Paris", "Florence", "Shanghai", "Vancouver", "Singapore", "Brisbane", "Dubai", "Cartagena"]
 
 tags1 = ["art-and-culture", "food-and-drink", "entertainment", "nature", "sports", "cooking"]
 tags2 = ["budget", "mid-range", "luxury"]

@@ -7,11 +7,11 @@ tags.forEach((tag) => {
   tag.addEventListener("click", (event) =>{
     if (event.currentTarget.classList.contains("active")) {
       tag.classList.remove("active");
-      showTagResults();
+      showSelectedResults();
     } else {
       disableAllActiveTags();
       tag.classList.add("active");
-      showTagResults();
+      showSelectedResults();
     };
   });
 });
@@ -23,20 +23,20 @@ const disableAllActiveTags = () => {
 };
 
 
-const showTagResults = () => {
-  const activeTags = Array.from(document.querySelectorAll(".tag.active")).map(x => x.dataset.tag);
-  if (activeTags.length === 0) {
-    const allActivities = document.querySelectorAll(".activity");
-    allActivities.forEach((activity) => {
-      activity.style.display = "block"
-    });
-  } else {
-    const allActivities = document.querySelectorAll(".activity");
-    allActivities.forEach((activity) => {activity.style.display = "none"});
-    const selectedActivities = document.querySelectorAll(`.activity.${activeTags.join('.')}`);
-    selectedActivities.forEach((activity) => {activity.style.display = "block"});
-  };
-};
+// const showTagResults = () => {
+//   const activeTags = Array.from(document.querySelectorAll(".tag.active")).map(x => x.dataset.tag);
+//   if (activeTags.length === 0) {
+//     const allActivities = document.querySelectorAll(".activity");
+//     allActivities.forEach((activity) => {
+//       activity.style.display = "block"
+//     });
+//   } else {
+//     const allActivities = document.querySelectorAll(".activity[style='display: block;']");
+//     allActivities.forEach((activity) => {activity.style.display = "none"});
+//     const selectedActivities = document.querySelectorAll(`.activity.${activeTags.join('.')}[style='display: block;']`);
+//     selectedActivities.forEach((activity) => {activity.style.display = "block"});
+//   };
+// };
 
 //code for cities
 
@@ -46,11 +46,11 @@ cities.forEach((city) => {
   city.addEventListener("click", (event) =>{
     if (event.currentTarget.classList.contains("active")) {
       city.classList.remove("active");
-      showCityResults();
+      showSelectedResults();
     } else {
       disableAllActiveCities();
       city.classList.add("active");
-      showCityResults();
+      showSelectedResults();
     };
   });
 });
@@ -62,21 +62,59 @@ const disableAllActiveCities = () => {
 };
 
 
-const showCityResults = () => {
-  const activeCity = document.querySelector(".city-card.active")
-  console.log(activeCity);
-  if (activeCity) {
-    const allActivities = document.querySelectorAll(".activity");
-    allActivities.forEach((activity) => {activity.style.display = "none"});
-    const selectedActivities = document.querySelectorAll(`[data-city*="${activeCity.id}"]`);
-    selectedActivities.forEach((activity) => {activity.style.display = "block"});
-    document.getElementById("tag-list").scrollIntoView({ behavior: 'smooth', block: 'start' });
+const showSelectedResults = () => {
+  const activeCity = document.querySelector(".city-card.active");
+  const activeTags = Array.from(document.querySelectorAll(".tag.active")).map(x => x.dataset.tag);
+  if (activeCity && activeTags.length > 0) {
+    const selectedActivities = document.querySelectorAll(`.activity.${activeTags.join('.')}[data-city=${activeCity.id}]`);
+    const allActivities = document.querySelectorAll('.activity');
+    allActivities.forEach((activity) => {
+      activity.style.display = "none"
+    });
+    selectedActivities.forEach((activity) => {
+      activity.style.display = "block"
+    });
+  } else if (activeCity && activeTags.length === 0) {
+    const selectedActivities = document.querySelectorAll(`.activity[data-city=${activeCity.id}]`);
+    const allActivities = document.querySelectorAll('.activity');
+    allActivities.forEach((activity) => {
+      activity.style.display = "none"
+    });
+    selectedActivities.forEach((activity) => {
+      activity.style.display = "block"
+    });
+  } else if (!activeCity && activeTags.length > 0) {
+    const selectedActivities = document.querySelectorAll(`.activity.${activeTags.join('.')}`);
+    const allActivities = document.querySelectorAll('.activity');
+    allActivities.forEach((activity) => {
+      activity.style.display = "none"
+    });
+    selectedActivities.forEach((activity) => {
+      activity.style.display = "block"
+    });
   } else {
-    const allActivities = document.querySelectorAll(".activity");
-    allActivities.forEach((activity) => {activity.style.display = "block"});
-  };
+    const allActivities = document.querySelectorAll('.activity');
+    allActivities.forEach((activity) => {
+      activity.style.display = "block"
+    });
+  }
 };
 
+
+
+// const showCityResults = () => {
+//   const activeCity = document.querySelector(".city-card.active")
+//   if (activeCity) {
+//     const allActivities = document.querySelectorAll(".activity");
+//     allActivities.forEach((activity) => {activity.style.display = "none"});
+//     const selectedActivities = document.querySelectorAll(`[data-city*="${activeCity.id}"]`);
+//     selectedActivities.forEach((activity) => {activity.style.display = "block"});
+//     document.getElementById("tag-list").scrollIntoView({ behavior: 'smooth', block: 'start' });
+//   } else {
+//     const allActivities = document.querySelectorAll(".activity");
+//     allActivities.forEach((activity) => {activity.style.display = "block"});
+//   };
+// };
 
 
 // code for sort by price
@@ -131,3 +169,11 @@ const sortByDescending = () => {
     parent.appendChild(toSort[i]);
   }
 };
+
+const checkEmptyResults = () => {
+  const displayedActivities = document.querySelectorAll(`.activity[style='display: block;']`)
+  if (displayedActivities.length === 0) {
+    alert("No results for selected filters. Please remove a filter.");
+  };
+};
+
