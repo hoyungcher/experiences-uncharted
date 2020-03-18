@@ -2,7 +2,7 @@
 
 <div class="scrolling-wrapper">
   <% @cities.each do |city| %>
-    <div class="city-card" id="<%= city %>">
+    <div class="city-card" id="<%= city.downcase %>">
       <h4 class="city-name"><%= city.upcase %></h4>
       <img src="https://source.unsplash.com/200x300/?<%= city %>" >
     </div>
@@ -11,7 +11,7 @@
 
 <br>
 
-<div class="tag-container">
+<div class="tag-container" id="tag-list">
   <% @tags.each do |tag| %>
   <button class="tag" data-tag= "<%= tag.name %>"><%= tag.name.gsub("-"," ").capitalize %></button>
   <% end %>
@@ -29,7 +29,7 @@
 <div class="activities-container">
   <div class="row">
     <% @activities.each do |activity| %>
-    <div class="col-md-6 col-lg-4 activity <% activity.tags.each do |tag| %><%= tag.name %> <% end %>" data-price="<%= activity.price_per_person %>">
+    <div class="col-md-6 col-lg-4 activity <% activity.tags.each do |tag| %><%= tag.name %> <% end %>" data-price="<%= activity.price_per_person %>" data-city="<%= activity.city.downcase %>">
       <div class="card-trip">
         <img src="https://source.unsplash.com/1600x900/?<%= activity.name %><%= activity.city %>" />
         <div class="card-trip-infos">
