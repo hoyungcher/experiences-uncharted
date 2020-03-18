@@ -7,20 +7,27 @@
 }
 
 .date-active {
-  background-color: green;
+  background-color: #b5b5b5;
 }
 
 .calendar-heading {
   display: flex;
   justify-content: center;
+  background-color: teal;
+  color: white;
 }
 
 .calendar-heading a, .calendar-heading span {
-  margin: 10px 20px;
+  margin: 10px 50px;
+  color: white;
+}
+
+.calendar-heading a {
+  font-size: 15px;
 }
 
 .past.current-month, .today {
-  color: grey;
+  color: rgb(200,200,200);
 }
 
 .future.current-month:hover {
@@ -28,9 +35,35 @@
 }
 
 .date-busy {
-  color: grey;
+  color: rgb(200,200,200);
 }
 
 .hidden {
   display: none;
+}
+
+.errors {
+  color: red;
+}
+
+.new_booking  {
+  display: flex;
+  flex-direction: column
+}
+
+.btn.date-submit.btn-main {
+  margin: 0 auto;
+}
+
+.btn.date-submit.btn-main:disabled {
+  color: white;
+  cursor: default
+}
+
+.day, th {
+  text-align: center;
+}
+
+td {
+  background-color: #F4F4F4;
 }

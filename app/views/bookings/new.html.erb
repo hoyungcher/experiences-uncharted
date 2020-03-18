@@ -1,4 +1,4 @@
-<h2> You are booking <%= @activity.name %> with <%= @activity.host.first_name %> </h2>
+<h2> You are booking <%= @activity.name %> with <%= @activity.host.first_name %> @ $<%= @activity.price_per_person %> /pax </h2>
 
 <p class='errors'></p>
 <%= month_calendar do |date| %>
@@ -7,8 +7,8 @@
 
 <%= simple_form_for [@activity, @user, @booking] do |f| %>
   <%= f.input :date, as: :hidden, class: "date-hidden" %>
-  <%= f.input :group_size %>
-  <%= f.button :submit, class: 'date-submit' %>
+  <%= f.input :group_size, class: "my-5" %>
+  <%= f.button :submit, class: 'date-submit btn-main my-3' %>
 <% end %>
 
 
