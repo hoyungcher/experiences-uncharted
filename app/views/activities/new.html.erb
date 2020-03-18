@@ -2,8 +2,10 @@
 
 <%= simple_form_for([@host, @activity]) do |f| %>
   <%= f.input :name %>
-  <%= f.input :location %>
-  <%= f.input :price_per_day %>
+  <%= f.input :city %>
+  <%= f.input :price_per_person %>
   <%= f.input :description %>
+  <%= f.input :max_group_size %>
+  <%= f.input :duration %>
   <%= f.submit "add an activity", class: "btn btn-primary" %>
 <% end %>

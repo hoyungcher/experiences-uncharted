@@ -8,4 +8,6 @@ class Booking < ApplicationRecord
   validates :activity, presence: true
   validates :user, presence: true
   validates :host, presence: true
+  validates :group_size, presence: true, inclusion: { in: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    message: "%{value} is over max group size" }
 end

@@ -77,10 +77,12 @@ end
   activity_name = activities.keys.sample
   Activity.create!(
   name: activity_name,
-  location: locations.sample,
-  price_per_day: rand(12..250),
+  city: locations.sample,
+  price_per_person: rand(12..250),
   description: descriptions[activity_name],
-  host: Host.find(Host.first.id + index)
+  host: Host.find(Host.first.id + index),
+  duration: rand(1..10),
+  max_group_size: 10
   )
 end
 
@@ -97,7 +99,7 @@ end
 Activity.all.each do |activity|
   ActivityTag.create!(
   activity: activity,
-  tag: Tag.find_by_name(convert_price_to_tag(activity.price_per_day))
+  tag: Tag.find_by_name(convert_price_to_tag(activity.price_per_person))
   )
   ActivityTag.create!(
   activity: activity,
@@ -110,7 +112,8 @@ end
   activity: Activity.find(Activity.first.id + index),
   user: User.find(User.first.id + index),
   host: Host.find(Host.first.id + index),
-  date: Date.today + rand(0..30)
+  date: Date.today + rand(0..30),
+  group_size: rand(1..9)
   )
 end
 

@@ -12,12 +12,12 @@
 </div>
 <div class="activities-container">
   <% @activities.each do |activity| %>
-    <div class="activity <% activity.tags.each do |tag| %><%= tag.name %> <% end %>" data-price="<%= activity.price_per_day %>">
+    <div class="activity <% activity.tags.each do |tag| %><%= tag.name %> <% end %>" data-price="<%= activity.price_per_person %>">
       <h5><%= activity.host.first_name %> is hosting...</h5>
       <h2><%= link_to activity.name.capitalize, activity_path(activity) %></h2>
-      <p><strong>Location:</strong> <%= activity.location %></p>
+      <p><strong>City:</strong> <%= activity.city %></p>
       <p><strong>Description:</strong> <%= activity.description %></p>
-      <p><strong>Price:</strong> $<%= activity.price_per_day %></p>
+      <p><strong>Price per person:</strong> $<%= activity.price_per_person %></p>
     </div>
   <% end %>
 </div>

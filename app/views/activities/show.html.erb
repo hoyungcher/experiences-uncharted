@@ -1,9 +1,9 @@
 <h1><%= @activity.name %></h1>
-<h3 id="host-location" data-location="<%= @activity.location %>">Hosted by <%= @activity.host.first_name %> in <%= @activity.location %></h3>
+<h3 id="host-location" data-location="<%= @activity.city %>">Hosted by <%= @activity.host.first_name %> in <%= @activity.city %></h3>
 
 <h4>Activity Description:</h4>
 <p><%= @activity.description %></p>
-<p><strong>Price: </strong>$<%= @activity.price_per_day %></p>
+<p><strong>Price: </strong>$<%= @activity.price_per_person %></p>
 
 <div id="map" style="height: 300px; width: 600px"></div>
 
