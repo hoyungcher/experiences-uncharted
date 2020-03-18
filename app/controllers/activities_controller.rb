@@ -4,12 +4,12 @@ class ActivitiesController < ApplicationController
     @tags = Tag.all
     @unshow_banner = false
     @cities = Activity.select(:city).map(&:city).uniq
-
   end
 
   def show
     @activity = Activity.find(params[:id])
     @reviews = @activity.reviews.all
+    @unshow_activity_footer = false
   end
 
   def new

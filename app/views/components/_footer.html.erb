@@ -1,12 +1,30 @@
-<div class="footer">
-  <div class="footer-links">
-    <a href="#"><i class="fab fa-github"></i></a>
-    <a href="#"><i class="fab fa-instagram"></i></a>
-    <a href="#"><i class="fab fa-facebook"></i></a>
-    <a href="#"><i class="fab fa-twitter"></i></a>
-    <a href="#"><i class="fab fa-linkedin"></i></a>
-  </div>
-  <div class="footer-copyright">
-    © 2020 Experience Uncharted, Inc. All rights reserved.
-  </div>
+<div class="default-footer">
 </div>
+
+ <% if @unshow_activity_footer == false %>
+  <div class="footer">
+    <div class="footer-information">
+      <strong>$<%= Activity.find(params[:id]).price_per_person %> per person</strong>
+
+      <% if Activity.find(params[:id]).reviews.length > 0 %>
+      <div>
+        <% ratings = [] %>
+        <% Activity.find(params[:id]).reviews.each do |review| %>
+          <% ratings << review.rating %>
+        <% end %>
+        <% (ratings.inject{ |sum, el| sum + el }.to_f / ratings.size).round().times do %>
+          <i class="fas fa-star"></i>
+        <% end %>
+        (<%= ratings.length %> reviews)
+      </div>
+      <% end %>
+    </div>
+    <div>
+      <% if current_user.nil? %>
+      <%= link_to "Show Dates", new_user_session_path, class: "btn-navbar" %>
+      <% else %>
+      <%= link_to "Show Dates", new_activity_user_booking_path(Activity.find(params[:id]), current_user), class: "btn-navbar" %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

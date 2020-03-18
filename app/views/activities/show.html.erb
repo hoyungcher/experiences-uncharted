@@ -31,12 +31,6 @@
     <p><i class="fas fa-user-friends"></i> Max <%= @activity.max_group_size %> people</p>
     <p><i class="fas fa-dollar-sign"></i> <%= @activity.price_per_person %> per person</p>
   </div>
-
-  <% if current_user.nil? %>
-  <%= link_to "Book Now!", new_user_session_path, class: "btn-main" %>
-  <% else %>
-  <%= link_to "Book Now!", new_activity_user_booking_path(@activity, current_user), class: "btn-main" %>
-  <% end %>
 </div>
 
 <div class="activity-description">
@@ -62,7 +56,4 @@
 <% end %>
 <% end %>
 
-<div id="map" style="height: 300px; width: 600px"></div>
-
-
-
+<!-- <div id="map" style="height: 300px; width: 600px"></div> -->
