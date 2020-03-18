@@ -5,15 +5,20 @@
     </button>
     <div class="navbar-collapse collapse justify-content-between" id="navbarNavAltMarkup">
       <%= link_to root_path, class: "mx-3 nav-btn" do %>
-        <i class="fas fa-mountain"></i> Home
+      <i class="fas fa-mountain"></i> Home
       <% end %>
       <% if user_signed_in? %>
-      <div class="navbar-nav">
-        <%= link_to "My Bookings", user_bookings_path(current_user), class: "mx-3 nav-btn" %>
-        <%= link_to "Sign Out", destroy_user_session_path, class: "mx-3 nav-btn" %>
-      </div>
+        <div class="navbar-nav">
+          <%= link_to "My Bookings", user_bookings_path(current_user), class: "mx-3 nav-btn" %>
+          <%= link_to "Sign Out", destroy_user_session_path, class: "mx-3 nav-btn" %>
+        </div>
+      <% elsif host_signed_in? %>
+        <div class="navbar-nav">
+          <%= link_to "Sign Out", destroy_host_session_path, class: "mx-3 nav-btn" %>
+        </div>
       <% else %>
       <div class="navbar-nav">
+        <%= link_to "Are you a host?", new_host_session_path, class: "mx-3 nav-btn" %>
         <%= link_to "Sign Up", new_user_registration_path, class: "mx-3 nav-btn" %>
         <%= link_to "Login", new_user_session_path, class: "mx-3 nav-btn" %>
       </div>
