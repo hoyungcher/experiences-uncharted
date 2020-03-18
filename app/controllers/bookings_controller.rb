@@ -24,9 +24,12 @@ class BookingsController < ApplicationController
     @host = @activity.host
     @user = User.find(params[:user_id])
     @date = Date.parse(params[:booking]["date"])
-    @booking = Booking.new(activity: @activity, host: @host, user: @user, date: @date)
+    @group_size = params[:booking]["group_size"]
+    @booking = Booking.new(activity: @activity, host: @host, user: @user, date: @date, group_size: @group_size)
     if @booking.save
       redirect_to user_bookings_path(@user)
+    else
+      render :new
     end
   end
 
