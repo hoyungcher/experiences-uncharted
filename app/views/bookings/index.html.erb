@@ -1,27 +1,43 @@
 <h1>Your bookings</h1>
 
-<table>
-  <tr>
-    <th>Date</th>
-    <th>Activity</th>
-    <th>Host</th>
-    <th>Location</th>
-    <th></th>
-  </tr>
-  <% @bookings.each do |booking| %>
-    <tr>
-      <td><%= booking.date %></td>
-      <td><%= booking.activity.name %></td>
-      <td><%= booking.host.first_name %></a></td>
-      <td><%= booking.activity.city %></a></td>
-      <% if booking.date > Date.today %>
-        <td>Experience Coming Up</td>
-        <td><%= link_to "Cancel Booking", activity_user_booking_path(booking.activity, booking.user, booking), method: :delete, data: {confirm: "Are you sure?"}  %></td>
-      <% end %>
-      <% if booking.date < Date.today %>
-        <td>Experience Completed</td>
-        <td><%= link_to "Add Review", new_user_booking_review_path(booking.user, booking) %></td>
-      <% end %>
-    </tr>
+<% if @bookings.empty? %>
+<div class="empty-booking">
+<p>You currently have no bookings! Click <%= link_to "here", activities_path %> to view all activities</p>
+</div>
+<% end %>
+
+<% previous = [] %>
+
+<% @bookings.each do |booking| %>
+  <% if booking.date > Date.today %>
+  <div class="card-product">
+    <img src=<%= "https://source.unsplash.com/1600x900/?#{booking.activity.name}" %> />
+    <div class="card-product-infos">
+      <h2><%= link_to "#{booking.activity.name.capitalize} with #{booking.activity.host.first_name}" , activity_path(booking.activity) %></h2>
+      <p>Date: <%= booking.date %></p>
+      <p><%= booking.activity.city %></p>
+      <p><%= link_to "Cancel Booking", activity_user_booking_path(booking.activity, booking.user, booking), method: :delete,  data: {:confirm => 'Are you sure?'} %></p>
+    </div>
+  </div>
+  <% else %>
+    <% previous << booking %>
   <% end %>
-</table>
+<% end %>
+
+
+<% unless previous.empty? %>
+  <h1>Previous Bookings</h1>
+  <% @bookings.each do |booking| %>
+    <% if booking.date <= Date.today %>
+      <div class="card-product">
+      <img src=<%= "https://source.unsplash.com/1600x900/?#{booking.activity.name}" %> />
+        <div class="card-product-infos">
+          <h2><%= link_to "#{booking.activity.name.capitalize} with #{booking.activity.host.first_name}" , activity_path(booking.activity) %></h2>
+          <p>Date: <%= booking.date %></p>
+          <p><%= booking.activity.city %></p>
+          <p><%= link_to "Leave a Review!", new_user_booking_review_path(booking.user, booking) %></p>
+        </div>
+      </div>
+    <% end %>
+    <% end %>
+<% end %>

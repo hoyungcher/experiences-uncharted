@@ -37,6 +37,6 @@ class BookingsController < ApplicationController
     @user = User.find(params[:user_id])
     @booking = Booking.find(params[:id])
     @booking.destroy
-    redirect_to user_path(@user.id)
+    redirect_to user_bookings_path(@user)
   end
 end
