@@ -10,6 +10,7 @@ require 'faker'
 puts "Destroying database..."
 ActivityTag.destroy_all
 Tag.destroy_all
+Review.destroy_all
 Booking.destroy_all
 Activity.destroy_all
 Host.destroy_all
