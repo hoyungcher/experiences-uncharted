@@ -28,6 +28,25 @@ class ActivitiesController < ApplicationController
     end
   end
 
+  def edit
+    @host = current_host
+    @activity = Activity.find(params[:id])
+  end
+
+  def update
+    @host = current_host
+    @activity = Activity.find(params[:id])
+    @activity.update(activity_params)
+    redirect_to host_path(@host)
+  end
+
+  def destroy
+    @host = current_host
+    @activity = Activity.find(params[:id])
+    @activity.destroy
+    redirect_to host_path(@host)
+  end
+
   private
 
   def activity_params

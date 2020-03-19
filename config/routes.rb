@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     end
   end
   resources :hosts, only: [ :show ] do
-    resources :activities, only: [ :index, :show, :new, :create ]
+    resources :activities, only: [ :index, :show, :new, :create, :edit, :update, :destroy ]
     resources :bookings, only: [ :index, :show]
   end
   resources :activities, only: [ :index, :show ] do
