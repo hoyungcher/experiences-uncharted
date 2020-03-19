@@ -1,4 +1,4 @@
-// import "bootstrap";
+import "bootstrap";
 
 // // code for tags
 // const tags = document.querySelectorAll(".tag");

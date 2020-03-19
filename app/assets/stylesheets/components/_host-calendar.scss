@@ -1,7 +1,15 @@
 .upcoming-booking {
-  color: red;
+  color: teal;
+}
+
+.upcoming-booking:hover {
+  cursor: pointer;
 }
 
 .set-available {
   font-size: 22px;
+}
+
+.unclickable.future:hover {
+  cursor: default;
 }
