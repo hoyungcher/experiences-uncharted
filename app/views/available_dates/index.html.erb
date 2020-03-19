@@ -1,0 +1,9 @@
+<h1>
+  <% @available_dates.each do |date| %>
+    <%= date.date %>
+  <% end %>
+</h1>
+<%= month_calendar do |date| %>
+  <%= date %>
+<% end %>
+<%= javascript_pack_tag "calendar" %>
