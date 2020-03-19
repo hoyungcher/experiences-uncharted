@@ -11,7 +11,10 @@ Rails.application.routes.draw do
     end
   end
   resources :hosts, only: [ :show ] do
-    resources :available_dates, only: [ :index, :new, :create, :destroy ]
+    resources :available_dates, only: [ :index, :create ]
+    # collection do
+    #   post 'hosts/:id/',
+    # end
     resources :activities, only: [ :index, :show, :new, :create, :edit, :update, :destroy ]
     resources :bookings, only: [ :index, :show]
   end

@@ -1,4 +1,7 @@
 <h1>Welcome <%= @host.first_name %>!</h1>
+
+<%= link_to "Set your available dates", host_available_dates_path(@host) %>
+
 <h2>Your active activities:</h2>
 <div class="activities-container">
   <div class="row">

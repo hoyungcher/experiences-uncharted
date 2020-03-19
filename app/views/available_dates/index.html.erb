@@ -1,9 +1,16 @@
-<h1>
+<div class="hidden">
   <% @available_dates.each do |date| %>
-    <%= date.date %>
+    <h5 class="available-date"><%= date.date %></h5>
   <% end %>
-</h1>
+</div>
 <%= month_calendar do |date| %>
   <%= date %>
 <% end %>
-<%= javascript_pack_tag "calendar" %>
+<form method='post' action=<%= host_available_dates_path(@host) %>>
+<input name="authenticity_token" type="hidden" value=<%= form_authenticity_token %> />
+
+<input class='dates-post' name='host[dates]' type = "text" style ='display: none;'>
+<input type="submit" >
+</form>
+
+<%= javascript_pack_tag "host-calendar" %>
