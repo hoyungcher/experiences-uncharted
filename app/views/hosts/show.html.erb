@@ -15,8 +15,8 @@
             <p><%= activity.city %></p>
           </div>
           <div>
-            <h2 class="card-trip-pricing"><%= link_to "Edit", edit_host_activity_path(@host, activity) %></h2>
-            <h2 class="card-trip-pricing"><%= link_to "Delete", host_activity_path(@host, activity), method: :delete, data: {:confirm => 'Are you sure?'} %></h2>
+            <p class="text-right"><strong><%= link_to "Edit", edit_host_activity_path(@host, activity) %></strong></h2>
+            <p class="text-right"><strong><%= link_to "Delete", host_activity_path(@host, activity), method: :delete, data: {:confirm => 'Are you sure?'} %></strong></h2>
           <!-- <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-trip-user avatar-bordered" /> -->
           </div>
         </div>
