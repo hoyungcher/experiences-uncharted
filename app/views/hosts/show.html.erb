@@ -5,8 +5,9 @@
     <% if booking.date >= Date.today %>
       <div class="bookings">
         <div class="host-booked-date"><%= booking.date %></div>
-        <div class="activity-name"><%= booking.activity.name %></div>
-        <div class="guest-name"><%= booking.user.first_name %></div>
+        <p class="activity-name"><%= booking.activity.name %></p>
+        <p class="guest-name"><%= booking.user.first_name %></p>
+        <p class="group-size"><%= booking.group_size %></p>
        </div>
     <% end %>
   <% end %>
@@ -27,6 +28,8 @@
     <p> <%= date %> </p>
   <% end %>
 </div>
+
+<p class="add-activity my-5"><%= link_to "Add a new activity!", new_host_activity_path(@host), class: "btn-main" %></p>
 
 <div class="activities-container">
   <h2>Your active activities:</h2>
@@ -57,7 +60,6 @@
     <% end %>
   </div>
 </div>
-<p class="add-activity"><%= link_to "Add a new activity!", new_host_activity_path(@host), class: "btn-main" %></p>
 
 <div class="activities-container">
   <h2>Upcoming bookings</h2>
