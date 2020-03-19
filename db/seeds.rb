@@ -13,12 +13,13 @@ Tag.destroy_all
 Review.destroy_all
 Booking.destroy_all
 Activity.destroy_all
+AvailableDate.destroy_all
 Host.destroy_all
 User.destroy_all
 
 puts "Starting seed..."
 
-activities = {"essential walking tour" => "art-and-culture", "hiking" => "nature", "italian cooking lesson" => "cooking", "local cuisine lesson" => "cooking", "farm visit" => "nature",
+activities = {"essential walking tour" => "art-and-culture", "trekking" => "nature", "italian cooking lesson" => "cooking", "local cuisine lesson" => "cooking", "farm visit" => "nature",
               "wine tasting" => "food-and-drink", "tandem paragliding" => "sports", "graffiti tour" => "art-and-culture", "underground tour" => "art-and-culture",
               "traditional sport" => "sports", "ballet show" => "entertainment", "circus show" => "entertainment"}
 
@@ -28,7 +29,7 @@ tags1 = ["art-and-culture", "food-and-drink", "entertainment", "nature", "sports
 tags2 = ["budget", "mid-range", "luxury"]
 
 descriptions = {"essential walking tour" => "Through this tour you can have a general historical notion, but also the lifestyle of the residents. We will follow with history, culture, day to day, food, religion, curiosities and news. The local guide will be an open book about the city, and provide with the tour a general notion, but also a starting point for those who want to discover more deeply the old town and surroundings. The aim of the project is to provide a close and authentic experience, so the group will be limited to 10 participants maximum.",
-                "hiking" => "Located at the foot of the nearby mountain range, at only minutes from the center of town, the Sierras presents itself as an opportunity for those who are just starting in the world of mountaineering. Here you will enjoy a spectacular scenery that offers a magnificent view of the great capital city and the imposing Mountain Range as a reward for the hard efforts to reach it’s summit.",
+                "trekking" => "Located at the foot of the nearby mountain range, at only minutes from the center of town, the Sierras presents itself as an opportunity for those who are just starting in the world of mountaineering. Here you will enjoy a spectacular scenery that offers a magnificent view of the great capital city and the imposing Mountain Range as a reward for the hard efforts to reach it’s summit.",
                 "italian cooking lesson" => "Following a recipe could seem easy, but knowing the history and secrets of the dish, being aware of the origin of its ingredients is a real and fulfilling experience! We will relax drinking a good glass of wine and we will be able to see directly how to cook the best dish.",
                 "local cuisine lesson" => "Come discover the local cuisine, using locally sourced organic ingredients!",
                 "farm visit" => "You will visit the only dairy farm which has a pumpkin field as well",
@@ -74,6 +75,12 @@ end
   )
 end
 
+Host.all.each do |host|
+  45.times do |index|
+    AvailableDate.create!(host: host, date: Date.today + index)
+  end
+end
+
 20.times do |index|
   activity_name = activities.keys.sample
   Activity.create!(
@@ -111,107 +118,84 @@ end
 20.times do |index| Booking.create!(
   activity: Activity.find(Activity.first.id + index),
   user: User.find(User.first.id + index),
-  host: Host.find(Host.first.id + index),
-  date: Date.today + rand(0..30),
+  host: Activity.find(Activity.first.id + index).host,
+  date: Date.today + index,
   group_size: rand(1..9)
   )
 end
 
-booking1 = Booking.create!(
-  activity: Activity.find(Activity.first.id),
-  user: User.find(User.first.id),
-  host: Activity.find(Activity.first.id).host,
-  date: Date.today - 2,
-  group_size: 4
+20.times do |index| Booking.create!(
+  activity: Activity.find(Activity.last.id - index),
+  user: User.find(User.first.id + index),
+  host: Activity.find(Activity.last.id - index).host,
+  date: Date.today + index + 20,
+  group_size: rand(1..9)
   )
+end
 
-booking2 = Booking.create!(
-  activity: Activity.find(Activity.first.id),
-  user: User.find(User.first.id),
-  host: Activity.find(Activity.first.id).host,
-  date: Date.today - 5,
-  group_size: 4
-  )
+past_bookings = []
 
-booking3 = Booking.create!(
-  activity: Activity.find(Activity.first.id),
-  user: User.find(User.first.id),
-  host: Activity.find(Activity.first.id).host,
-  date: Date.today - 7,
-  group_size: 4
+20.times do |index|
+  booking = Booking.new(
+  activity: Activity.find(Activity.first.id + index),
+  user: User.find(User.first.id + index),
+  host: Activity.find(Activity.first.id + index).host,
+  date: Date.today - index,
+  group_size: rand(1..9)
   )
+  booking.save
+  past_bookings << booking
+end
 
-review1 = Review.create!(
-  content: "Great activity! Loved our guide - was super friendly and knowledgeable.",
-  rating: 5,
-  user: User.find(User.first.id),
-  booking: Booking.find(Booking.first.id)
+20.times do |index|
+  booking = Booking.new(
+  activity: Activity.find(Activity.last.id - index),
+  user: User.find(User.first.id + index),
+  host: Activity.find(Activity.last.id - index).host,
+  date: Date.today - index - 20,
+  group_size: rand(1..9)
   )
+  booking.save
+  past_bookings << booking
+end
 
-review2 = Review.create!(
-  content: "Would recommend to anyone looking for some adventure.",
-  rating: 4,
-  user: User.find(User.first.id + 1),
-  booking: Booking.find(Booking.first.id)
-  )
 
-review3 = Review.create!(
-  content: "Enjoyed this, but probably shouldn't have gone out during this time because WE SHOULD ALL PRACTICE SOCIAL DISTANCING.",
-  rating: 5,
-  user: User.find(User.first.id + 2),
-  booking: Booking.find(Booking.first.id)
-  )
+past_bookings.each do |booking|
+  review1 = Review.new(
+    content: "Great activity! Loved our guide - was super friendly and knowledgeable.",
+    rating: 5,
+    )
+
+  review2 = Review.new(
+    content: "Would recommend to anyone looking for some adventure.",
+    rating: 4,
+    )
+
+  review3 = Review.new(
+    content: "Enjoyed this, but probably shouldn't have gone out during this time because WE SHOULD ALL PRACTICE SOCIAL DISTANCING.",
+    rating: 3,
+    )
+
+  review4 = Review.new(
+    content: "Bad experience, I would not recommend",
+    rating: 2,
+    )
+
+  review5 = Review.new(
+    content: "Host was irresponsible. I want my money back",
+    rating: 1,
+    )
+  reviews = [review1, review2, review3, review4, review5]
+  review = reviews.sample
+  review.booking = booking
+  review.user = booking.user
+  review.save
+end
+
+
+
+
 
 puts "seed done"
 
-# ActiveRecord::Schema.define(version: 2020_03_16_072211) do
 
-#   # These are extensions that must be enabled in order to support this database
-#   enable_extension "plpgsql"
-
-#   create_table "activities", force: :cascade do |t|
-#     t.string "name"
-#     t.string "location"
-#     t.integer "price_per_day"
-#     t.text "description"
-#     t.bigint "host_id"
-#     t.datetime "created_at", null: false
-#     t.datetime "updated_at", null: false
-#     t.index ["host_id"], name: "index_activities_on_host_id"
-#   end
-
-#   create_table "bookings", force: :cascade do |t|
-#     t.bigint "activity_id"
-#     t.bigint "user_id"
-#     t.bigint "host_id"
-#     t.date "date"
-#     t.datetime "created_at", null: false
-#     t.datetime "updated_at", null: false
-#     t.index ["activity_id"], name: "index_bookings_on_activity_id"
-#     t.index ["host_id"], name: "index_bookings_on_host_id"
-#     t.index ["user_id"], name: "index_bookings_on_user_id"
-#   end
-
-#   create_table "hosts", force: :cascade do |t|
-#     t.string "email"
-#     t.string "password"
-#     t.string "first_name"
-#     t.string "last_name"
-#     t.datetime "created_at", null: false
-#     t.datetime "updated_at", null: false
-#   end
-
-#   create_table "users", force: :cascade do |t|
-#     t.string "email"
-#     t.string "password"
-#     t.string "first_name"
-#     t.string "last_name"
-#     t.datetime "created_at", null: false
-#     t.datetime "updated_at", null: false
-#   end
-
-#   add_foreign_key "activities", "hosts"
-#   add_foreign_key "bookings", "activities"
-#   add_foreign_key "bookings", "hosts"
-#   add_foreign_key "bookings", "users"
-# end
