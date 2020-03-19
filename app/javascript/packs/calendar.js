@@ -9,6 +9,8 @@ const groupSize = document.getElementById('booking_group_size')
 const availableDates = Array.from(document.querySelectorAll(".avail-dates"))
 console.log(availableDates)
 
+button.disabled = true;
+
 futures.forEach((future) => {
   future.classList.remove('future')
   future.classList.add('past')
@@ -25,7 +27,9 @@ futures.forEach((future) => {
       if (activeDate) {
         activeDate.classList.remove('date-active')
       }
-      e.currentTarget.classList.add('date-active');
+      e.currentTarget.classList.add('date-active')
+      bookingDate.value = e.target.innerText;
+      button.disabled = false;
     }
   })
 })
