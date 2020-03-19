@@ -1,3 +1,9 @@
+<div class="hidden">
+  <% @host_availability.each do |date| %>
+    <div class="avail-dates"><%= date.date %></div>
+  <% end %>
+</div>
+
 <h2> You are booking <%= @activity.name.capitalize %> with <%= @activity.host.first_name %></h2>
 
 <p class='errors'></p>

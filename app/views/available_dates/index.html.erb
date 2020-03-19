@@ -1,4 +1,7 @@
 <div class="hidden">
+  <% @bookings.each do |booking| %>
+    <div class="booked-date"><%= booking.date %></div>
+  <% end %>
   <% @available_dates.each do |date| %>
     <h5 class="available-date"><%= date.date %></h5>
   <% end %>
@@ -7,10 +10,10 @@
   <%= date %>
 <% end %>
 <form method='post' action=<%= host_available_dates_path(@host) %>>
-<input name="authenticity_token" type="hidden" value=<%= form_authenticity_token %> />
+  <input name="authenticity_token" type="hidden" value=<%= form_authenticity_token %> />
 
-<input class='dates-post' name='host[dates]' type = "text" style ='display: none;'>
-<input type="submit" >
+  <input class='dates-post' name='host[dates]' type = "text" style ='display: none;'>
+  <input type="submit" >
 </form>
 
 <%= javascript_pack_tag "host-calendar" %>
