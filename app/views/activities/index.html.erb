@@ -1,31 +1,50 @@
-<h1 class="text-center">Find an Experience</h1>
+<h1 class="text-center">Choose your Location</h1>
 
-<div class="scrolling-wrapper">
-  <% @cities.each do |city| %>
-    <div class="city-card" id="<%= city.downcase %>">
-      <h4 class="city-name"><%= city.upcase %></h4>
-      <img src="https://source.unsplash.com/200x300/?<%= city %>" >
-    </div>
-  <% end %>
+<div class="choose-location">
+  <div class="scrolling-wrapper">
+    <% @cities.sort.each do |city| %>
+      <div class="city-card" id="<%= city.downcase %>">
+        <h4 class="city-name"><%= city.upcase %></h4>
+        <img src="https://source.unsplash.com/250x375/?<%= city %>" >
+      </div>
+    <% end %>
+  </div>
 </div>
-
 <br>
 
-<div class="tag-container" id="tag-list">
-  <% @tags.each do |tag| %>
-  <button class="tag" data-tag= "<%= tag.name %>"><%= tag.name.gsub("-"," ").capitalize %></button>
-  <% end %>
-</div>
+<% if false %>
+  <div class="tag-container" id="tag-list">
+    <% @tags.each do |tag| %>
+    <button class="tag" data-tag= "<%= tag.name %>"><%= tag.name.gsub("-"," ").capitalize %></button>
+    <% end %>
+  </div>
+<% end %>
 
+<div id="scroll-to-category"></div>
+
+<h1 class="text-center" >Choose your Category</h1>
+
+<div id="choose-category">
+  <div class="scrolling-wrapper">
+    <% @tags.each do |tag| %>
+      <div class="category-card" data-tag= "<%= tag.name %>">
+        <h4 class="category-name"><%= tag.name.gsub("-"," ").upcase %></h4>
+        <img src="https://source.unsplash.com/250x375/?<%= tag.name %>" >
+      </div>
+    <% end %>
+  </div>
+</div>
 <br>
 
-<div class="sort-container">
+<div id="scroll-to-sort"></div>
+
+<div class="sort-container" id="sort-options">
   Sort by:
   <button id="price-ascending" class="sort">Lowest Price First</button>
   <button id="price-descending" class="sort">Highest Price First</button>
 </div>
 
-
+<h3 id="display-message" style="display: none;">No activites found for selected filter. Please select another category filter.</h3>
 <div class="activities-container">
   <div class="row">
     <% @activities.each do |activity| %>
@@ -49,29 +68,6 @@
 
 <script>
   // code for tags
-const tags = document.querySelectorAll(".tag");
-
-tags.forEach((tag) => {
-  tag.addEventListener("click", (event) =>{
-    if (event.currentTarget.classList.contains("active")) {
-      tag.classList.remove("active");
-      showSelectedResults();
-    } else {
-      disableAllActiveTags();
-      tag.classList.add("active");
-      showSelectedResults();
-    };
-  });
-});
-
-const disableAllActiveTags = () => {
-  tags.forEach((tag) => {
-    tag.classList.remove("active");
-  })
-};
-
-//code for cities
-
 const cities = document.querySelectorAll(".city-card");
 
 cities.forEach((city) => {
@@ -83,6 +79,7 @@ cities.forEach((city) => {
       disableAllActiveCities();
       city.classList.add("active");
       showSelectedResults();
+      document.getElementById("scroll-to-category").scrollIntoView({behavior: "smooth", block: "start"});
     };
   });
 });
@@ -93,12 +90,42 @@ const disableAllActiveCities = () => {
   })
 };
 
+const categories = document.querySelectorAll(".category-card");
+
+categories.forEach((category) => {
+  category.addEventListener("click", (event) =>{
+    if (event.currentTarget.classList.contains("active")) {
+      category.classList.remove("active");
+      showSelectedResults();
+      document.getElementById('display-message').style.display = "none";
+    } else {
+      disableAllActiveTags();
+      category.classList.add("active");
+      showSelectedResults();
+      const displayedActivities = document.querySelectorAll(`.activity[style='display: block;']`);
+      if (displayedActivities.length > 0) {
+      document.getElementById('display-message').style.display = "none";
+      document.getElementById("scroll-to-sort").scrollIntoView({behavior: "smooth", block: "start"});
+      } else {
+        document.getElementById('display-message').style.display = "block";
+      };
+    };
+  });
+});
+
+const disableAllActiveTags = () => {
+  categories.forEach((category) => {
+    category.classList.remove("active");
+  })
+};
+
+
 
 const showSelectedResults = () => {
   const activeCity = document.querySelector(".city-card.active");
-  const activeTags = Array.from(document.querySelectorAll(".tag.active")).map(x => x.dataset.tag);
-  if (activeCity && activeTags.length > 0) {
-    const selectedActivities = document.querySelectorAll(`.activity.${activeTags.join('.')}[data-city=${activeCity.id}]`);
+  const activeCategories = Array.from(document.querySelectorAll(".category-card.active")).map(x => x.dataset.tag);
+  if (activeCity && activeCategories.length > 0) {
+    const selectedActivities = document.querySelectorAll(`.activity.${activeCategories.join('.')}[data-city=${activeCity.id}]`);
     const allActivities = document.querySelectorAll('.activity');
     allActivities.forEach((activity) => {
       activity.style.display = "none"
@@ -106,7 +133,7 @@ const showSelectedResults = () => {
     selectedActivities.forEach((activity) => {
       activity.style.display = "block"
     });
-  } else if (activeCity && activeTags.length === 0) {
+  } else if (activeCity && activeCategories.length === 0) {
     const selectedActivities = document.querySelectorAll(`.activity[data-city=${activeCity.id}]`);
     const allActivities = document.querySelectorAll('.activity');
     allActivities.forEach((activity) => {
@@ -115,8 +142,8 @@ const showSelectedResults = () => {
     selectedActivities.forEach((activity) => {
       activity.style.display = "block"
     });
-  } else if (!activeCity && activeTags.length > 0) {
-    const selectedActivities = document.querySelectorAll(`.activity.${activeTags.join('.')}`);
+  } else if (!activeCity && activeCategories.length > 0) {
+    const selectedActivities = document.querySelectorAll(`.activity.${activeCategories.join('.')}`);
     const allActivities = document.querySelectorAll('.activity');
     allActivities.forEach((activity) => {
       activity.style.display = "none"
