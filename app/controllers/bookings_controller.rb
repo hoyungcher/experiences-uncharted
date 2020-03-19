@@ -16,6 +16,7 @@ class BookingsController < ApplicationController
   def new
     @activity = Activity.find(params[:activity_id])
     @user = User.find(params[:user_id])
+    @host_availability = @activity.host.available_dates
     @booking = Booking.new
   end
 
