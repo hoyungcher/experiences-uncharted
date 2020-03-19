@@ -22,22 +22,6 @@ const disableAllActiveTags = () => {
   })
 };
 
-
-// const showTagResults = () => {
-//   const activeTags = Array.from(document.querySelectorAll(".tag.active")).map(x => x.dataset.tag);
-//   if (activeTags.length === 0) {
-//     const allActivities = document.querySelectorAll(".activity");
-//     allActivities.forEach((activity) => {
-//       activity.style.display = "block"
-//     });
-//   } else {
-//     const allActivities = document.querySelectorAll(".activity[style='display: block;']");
-//     allActivities.forEach((activity) => {activity.style.display = "none"});
-//     const selectedActivities = document.querySelectorAll(`.activity.${activeTags.join('.')}[style='display: block;']`);
-//     selectedActivities.forEach((activity) => {activity.style.display = "block"});
-//   };
-// };
-
 //code for cities
 
 const cities = document.querySelectorAll(".city-card");
@@ -99,22 +83,6 @@ const showSelectedResults = () => {
     });
   }
 };
-
-
-
-// const showCityResults = () => {
-//   const activeCity = document.querySelector(".city-card.active")
-//   if (activeCity) {
-//     const allActivities = document.querySelectorAll(".activity");
-//     allActivities.forEach((activity) => {activity.style.display = "none"});
-//     const selectedActivities = document.querySelectorAll(`[data-city*="${activeCity.id}"]`);
-//     selectedActivities.forEach((activity) => {activity.style.display = "block"});
-//     document.getElementById("tag-list").scrollIntoView({ behavior: 'smooth', block: 'start' });
-//   } else {
-//     const allActivities = document.querySelectorAll(".activity");
-//     allActivities.forEach((activity) => {activity.style.display = "block"});
-//   };
-// };
 
 
 // code for sort by price
