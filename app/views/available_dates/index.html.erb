@@ -6,14 +6,20 @@
     <h5 class="available-date"><%= date.date %></h5>
   <% end %>
 </div>
+<h5>Legend:</h5>
+<p class="host-booked">Booked</p>
+<p class="host-available">Available</p>
+
 <%= month_calendar do |date| %>
   <%= date %>
 <% end %>
-<form method='post' action=<%= host_available_dates_path(@host) %>>
+<form class="d-flex justify-content-center" method='post' action=<%= host_available_dates_path(@host) %>>
   <input name="authenticity_token" type="hidden" value=<%= form_authenticity_token %> />
 
   <input class='dates-post' name='host[dates]' type = "text" style ='display: none;'>
-  <input type="submit" >
+  <input class="btn btn-main" type="submit" >
 </form>
+
+<p><%= link_to "Back to dashboard", host_path(@host) %></p>
 
 <%= javascript_pack_tag "host-calendar" %>

@@ -1,23 +1,55 @@
 <h1>Welcome <%= @host.first_name %>!</h1>
 
-<%= link_to "Set your available dates", host_available_dates_path(@host) %>
+<div class="hidden">
+  <% @host.bookings.each do |booking| %>
+    <% if booking.date >= Date.today %>
+      <div class="bookings">
+        <div class="host-booked-date"><%= booking.date %></div>
+        <div class="activity-name"><%= booking.activity.name %></div>
+        <div class="guest-name"><%= booking.user.first_name %></div>
+       </div>
+    <% end %>
+  <% end %>
+</div>
 
-<h2>Your active activities:</h2>
+<div class="hidden">
+  <% @host.available_dates.each do |date| %>
+    <div class="availability"><%= date.date %></div>
+  <% end %>
+</div>
+
+<div class="my-4">
+  <%= link_to "Set your available dates", host_available_dates_path(@host) %>
+</div>
+
+<div class="my-4">
+  <%= month_calendar do |date| %>
+    <p> <%= date %> </p>
+  <% end %>
+</div>
+
 <div class="activities-container">
-  <div class="row">
+  <h2>Your active activities:</h2>
+    <div class="row">
+
     <% @host.activities.each do |activity| %>
     <div class="col-md-6 col-lg-4">
       <div class="card-trip">
         <img src="https://source.unsplash.com/1600x900/?<%= activity.name %><%= activity.city %>" />
-        <div class="card-trip-infos">
+        <div class="card-trip-infos active-activities">
           <div>
             <h2><%= link_to activity.name.capitalize, activity_path(activity) %></h2>
             <p><%= activity.city %></p>
           </div>
-          <div>
-            <p class="text-right"><strong><%= link_to "Edit", edit_host_activity_path(@host, activity) %></strong></h2>
-            <p class="text-right"><strong><%= link_to "Delete", host_activity_path(@host, activity), method: :delete, data: {:confirm => 'Are you sure?'} %></strong></h2>
-          <!-- <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-trip-user avatar-bordered" /> -->
+          <div class="d-flex align-items-start">
+            <h2 class="card-trip-pricing mx-3"><%= link_to edit_host_activity_path(@host, activity) do %>
+              <i class="fas fa-edit"></i>
+              <% end %>
+            </h2>
+            <h2 class="card-trip-pricing"><%= link_to host_activity_path(@host, activity), method: :delete, data: {:confirm => 'Are you sure?'} do %>
+              <i class="fas fa-trash"></i>
+              <% end %>
+            </h2>
           </div>
         </div>
       </div>
@@ -25,32 +57,45 @@
     <% end %>
   </div>
 </div>
-<p><%= link_to "Add a new activity!", new_host_activity_path(@host), class: "btn-main" %></p>
+<p class="add-activity"><%= link_to "Add a new activity!", new_host_activity_path(@host), class: "btn-main" %></p>
 
-<h2>Upcoming bookings</h2>
-<% @host.bookings.each do |booking| %>
-  <% if booking.date > Date.today %>
-    <div class="card-product">
-      <img src=<%= "https://source.unsplash.com/1600x900/?#{booking.activity.name}" %> />
-      <div class="card-product-infos">
-        <h2>Guest: <%= booking.user.first_name %> <%= booking.user.last_name %></h2>
-        <p>Date: <%= booking.date %> || Group Size: <%= booking.group_size %></p>
-        <p><%= link_to booking.activity.name.capitalize, activity_path(booking.activity) %> || <%= booking.activity.city %></p>
-        <p><%= link_to "Cancel Booking", activity_user_booking_path(booking.activity, booking.user, booking), method: :delete,  data: {:confirm => 'Are you sure?'} %></p>
+<div class="activities-container">
+  <h2>Upcoming bookings</h2>
+  <div class="row">
+    <% @host.bookings.each do |booking| %>
+    <% if booking.date > Date.today %>
+      <div class="col-md-6 col-lg-4">
+        <div class="card-product">
+          <div class="card-product-infos">
+            <h2>Guest: <%= booking.user.first_name %> <%= booking.user.last_name %></h2>
+            <p>Date: <%= booking.date %> || Group Size: <%= booking.group_size %></p>
+            <p><%= link_to booking.activity.name.capitalize, activity_path(booking.activity) %> || <%= booking.activity.city %></p>
+            <p><%= link_to "Cancel Booking", activity_user_booking_path(booking.activity, booking.user, booking), method: :delete,  data: {:confirm => 'Are you sure?'} %></p>
+          </div>
+        </div>
       </div>
-    </div>
+    <% end %>
   <% end %>
-<% end %>
-<h2>Booking History</h2>
-<% @host.bookings.each do |booking| %>
-  <% if booking.date <= Date.today %>
-    <div class="card-product">
-      <img src=<%= "https://source.unsplash.com/1600x900/?#{booking.activity.name}" %> />
-      <div class="card-product-infos">
-        <h2>Guest: <%= booking.user.first_name %> <%= booking.user.last_name %></h2>
-        <p>Date: <%= booking.date %> || Group Size: <%= booking.group_size %></p>
-        <p><%= link_to booking.activity.name.capitalize, activity_path(booking.activity) %> || <%= booking.activity.city %></p>
+  </div>
+</div>
+
+<div class="activities-container">
+  <h2>Booking History</h2>
+  <div class="row">
+  <% @host.bookings.each do |booking| %>
+    <% if booking.date <= Date.today %>
+      <div class="col-md-6 col-lg-4">
+        <div class="card-product">
+          <div class="card-product-infos">
+            <h2>Guest: <%= booking.user.first_name %> <%= booking.user.last_name %></h2>
+            <p>Date: <%= booking.date %> || Group Size: <%= booking.group_size %></p>
+            <p><%= link_to booking.activity.name.capitalize, activity_path(booking.activity) %> || <%= booking.activity.city %></p>
+          </div>
+        </div>
       </div>
-    </div>
+    <% end %>
   <% end %>
-<% end %>
+  </div>
+</div>
+
+<%= javascript_pack_tag "host-dashboard-calendar" %>
