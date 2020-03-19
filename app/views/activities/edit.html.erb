@@ -1,0 +1,11 @@
+<h1>Edit activity details</h1>
+
+<%= simple_form_for([@host, @activity]) do |f| %>
+  <%= f.input :name %>
+  <%= f.input :city %>
+  <%= f.input :price_per_person %>
+  <%= f.input :description %>
+  <%= f.input :max_group_size %>
+  <%= f.input :duration %>
+  <%= f.submit "Edit Activity", class: "btn btn-primary" %>
+<% end %>

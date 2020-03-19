@@ -59,11 +59,11 @@ def convert_activity_to_tag(activity)
 end
 
 
-20.times do |index| User.create!(
+40.times do |index| User.create!(
   email: "user#{index}@email.com",
   first_name: Faker::Name.first_name,
   last_name: Faker::Name.last_name,
-  password: "pass#{rand(10..100)}"
+  password: "pass1234"
   )
 end
 
@@ -71,7 +71,7 @@ end
   email: "user#{index}@email.com",
   first_name: Faker::Name.first_name,
   last_name: Faker::Name.last_name,
-  password: "pass#{rand(10..100)}"
+  password: "pass1234"
   )
 end
 
@@ -138,7 +138,7 @@ past_bookings = []
 20.times do |index|
   booking = Booking.new(
   activity: Activity.find(Activity.first.id + index),
-  user: User.find(User.first.id + index),
+  user: User.find(User.first.id + index + 1),
   host: Activity.find(Activity.first.id + index).host,
   date: Date.today - index,
   group_size: rand(1..9)
@@ -150,7 +150,7 @@ end
 20.times do |index|
   booking = Booking.new(
   activity: Activity.find(Activity.last.id - index),
-  user: User.find(User.first.id + index),
+  user: User.find(User.first.id + index + 1),
   host: Activity.find(Activity.last.id - index).host,
   date: Date.today - index - 20,
   group_size: rand(1..9)
