@@ -2,7 +2,11 @@
   <% @host_availability.each do |date| %>
     <div class="avail-dates"><%= date.date %></div>
   <% end %>
+  <% @host.bookings.each do |booking| %>
+  <div class="booked-dates"><%= booking.date %></div>
+<% end %>
 </div>
+
 
 <h2> You are booking <%= @activity.name.capitalize %> with <%= @activity.host.first_name %></h2>
 

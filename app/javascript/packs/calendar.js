@@ -4,10 +4,11 @@ const table = document.querySelector('table');
 const bookingDate = document.getElementById('booking_date');
 const button = document.querySelector('.date-submit');
 const taken = document.querySelectorAll('.taken-dates');
-const groupSize = document.getElementById('booking_group_size')
+const groupSize = document.getElementById('booking_group_size');
+const bookedDates = document.querySelectorAll('.booked-dates');
 
 const availableDates = Array.from(document.querySelectorAll(".avail-dates"))
-console.log(availableDates)
+
 
 button.disabled = true;
 
@@ -20,6 +21,14 @@ futures.forEach((future) => {
       future.classList.add('future')
     }
   })
+
+  bookedDates.forEach((date) => {
+    if (date.innerText === future.innerText) {
+      future.classList.add('past')
+      future.classList.remove('future')
+    }
+  })
+
   future.addEventListener("click", (e) => {
     if (e.currentTarget.classList.contains('future')) {
 

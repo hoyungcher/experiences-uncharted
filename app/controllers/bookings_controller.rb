@@ -10,13 +10,14 @@ class BookingsController < ApplicationController
 
   def index
     @user = User.find(params[:user_id])
-    @bookings = @user.bookings
+    @bookings = @user.bookings.sort {|a, b| a.date <=> b.date }
   end
 
   def new
     @activity = Activity.find(params[:activity_id])
     @user = User.find(params[:user_id])
     @host_availability = @activity.host.available_dates
+    @host = @activity.host
     @booking = Booking.new
   end
 

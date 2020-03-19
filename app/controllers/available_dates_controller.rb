@@ -9,7 +9,10 @@ class AvailableDatesController < ApplicationController
   def create
     @host = current_host
     @dates = params[:host]["dates"].split(",")
-    @host.available_dates.where("date > ?", @dates.first).destroy_all
+    date = @dates.first.gsub("", "")
+    date[8] = "0"
+    date[9] = "1"
+    @host.available_dates.where("date > ?", date).destroy_all
     @dates.each do |date|
       AvailableDate.create(date: date, host: @host)
     end
