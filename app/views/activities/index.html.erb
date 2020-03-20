@@ -1,5 +1,4 @@
-<div id="location">
-</div>
+<div id="location"></div>
 
 <h2 class="text-center" style="margin-bottom: 60px;" dataset-spanish = "Elija su ciudad preferida" dataset-english= "Choose your Location">1. Choose your Location</h2>
 
@@ -71,6 +70,11 @@
 
 <script>
   // code for tags
+const beginButton = document.getElementById("begin-btn");
+beginButton.addEventListener("click", (event) => {
+  document.getElementById("location").scrollIntoView({behavior: "smooth", block: "start"});
+});
+
 const cities = document.querySelectorAll(".city-card");
 
 cities.forEach((city) => {
