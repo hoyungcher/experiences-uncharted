@@ -1,14 +1,19 @@
-<h1>Your bookings</h1>
+<h1>Your Bookings</h1>
+
 
 <% if @bookings.empty? %>
 <div class="empty-booking">
-<p>You currently have no bookings! Click <%= link_to "here", activities_path %> to view all activities</p>
+  <p>You currently have no bookings! Click <%= link_to "here", activities_path %> to view all activities</p>
 </div>
 <% end %>
 
 <% previous = [] %>
 
-<% @bookings.each do |booking| %>
+<div class="d-flex justify-content-between mt-4">
+
+<div class="mr-4 w-100">
+<h3 class="mb-4">Upcoming Bookings</h1>
+  <% @bookings.each do |booking| %>
   <% if booking.date > Date.today %>
   <div class="card-product">
     <img src=<%= "https://source.unsplash.com/1600x900/?#{booking.activity.name}" %> />
@@ -20,17 +25,19 @@
     </div>
   </div>
   <% else %>
-    <% previous << booking %>
+  <% previous << booking %>
   <% end %>
-<% end %>
-
+  <% end %>
+<%= link_to "Make Another Booking", activities_path, class: 'btn-main' %>
+</div>
 
 <% unless previous.empty? %>
-  <h1>Previous Bookings</h1>
-  <% @bookings.each do |booking| %>
+<div class="ml-4 w-100">
+  <h3 class="mb-4">Booking History</h1>
+  <% @bookings.first(5).each do |booking| %>
     <% if booking.date <= Date.today %>
       <div class="card-product">
-      <img src=<%= "https://source.unsplash.com/1600x900/?#{booking.activity.name}" %> />
+        <img src=<%= "https://source.unsplash.com/1600x900/?#{booking.activity.name}" %> />
         <div class="card-product-infos">
           <h2><%= link_to "#{booking.activity.name.capitalize} with #{booking.activity.host.first_name}" , activity_path(booking.activity) %></h2>
           <p>Date: <%= booking.date %></p>
@@ -39,5 +46,8 @@
         </div>
       </div>
     <% end %>
-    <% end %>
+  <% end %>
+</div>
 <% end %>
+</div>
+
