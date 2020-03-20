@@ -11,8 +11,8 @@
 
 <div class="d-flex justify-content-between mt-4">
 
-<div class="mr-4 w-100">
-<h3 class="mb-4">Upcoming Bookings</h1>
+<div class="mr-4 w-100 d-flex flex-column">
+<h3 class="mb-4">Upcoming Bookings</h3>
   <% @bookings.each do |booking| %>
   <% if booking.date > Date.today %>
   <div class="card-product">
@@ -28,12 +28,12 @@
   <% previous << booking %>
   <% end %>
   <% end %>
-<%= link_to "Make Another Booking", activities_path, class: 'btn-main' %>
+  <%= link_to "Make Another Booking", activities_path, class: 'btn-main mt-4 text-center' %>
 </div>
 
 <% unless previous.empty? %>
-<div class="ml-4 w-100">
-  <h3 class="mb-4">Booking History</h1>
+<div class="ml-4 w-100 d-flex flex-column">
+  <h3 class="mb-4">Booking History</h3>
   <% @bookings.first(5).each do |booking| %>
     <% if booking.date <= Date.today %>
       <div class="card-product">
