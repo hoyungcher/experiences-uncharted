@@ -40,6 +40,10 @@ class BookingsController < ApplicationController
     @user = User.find(params[:user_id])
     @booking = Booking.find(params[:id])
     @booking.destroy
-    redirect_to user_bookings_path(@user)
+    if current_user
+      redirect_to user_bookings_path(@user)
+    else
+      redirect_to host_path(current_host)
+    end
   end
 end
