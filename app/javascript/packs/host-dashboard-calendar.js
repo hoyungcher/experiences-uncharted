@@ -12,7 +12,6 @@ futures.forEach(future => {
       future.classList.remove('past');
       future.classList.remove('unclickable');
       future.classList.add("upcoming-booking");
-      future.insertAdjacentHTML('beforeend', `<i class="fas fa-dot-circle"></i>`);
       future.insertAdjacentHTML('beforeend', ` <div class ="hidden calendar-details">
         <p class="calendar-text">${booking.childNodes[3].innerText}</p>
         <p class="calendar-text">${booking.childNodes[5].innerText}</p>
@@ -34,6 +33,6 @@ futures.forEach(future => {
 const upcoming = document.querySelectorAll('.upcoming-booking')
 upcoming.forEach(booking => {
   booking.addEventListener('click', (e) => {
-    e.target.lastElementChild.classList.toggle('hidden')
+    e.currentTarget.lastElementChild.classList.toggle('hidden')
   })
 })
