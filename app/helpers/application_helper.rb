@@ -1,5 +1,4 @@
 module ApplicationHelper
-
   def role_helper
     if controller.class == Devise::SessionsController
      "experience-seeker"
