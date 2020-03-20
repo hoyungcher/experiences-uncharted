@@ -8,52 +8,57 @@
   </nav> -->
 
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between">
+    <div>
       <% if host_signed_in? %>
         <%= link_to host_path(current_host), class: "mx-3 nav-btn" do %>
-         <i class="fas fa-mountain"></i> Dashboard
+          <i class="fas fa-mountain"></i> Dashboard
         <% end %>
       <% else %>
         <%= link_to root_path, class: "mx-3 nav-btn" do %>
          <i class="fas fa-mountain"></i> Home
         <% end %>
       <% end %>
-  <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+    </div>
 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-      <% if user_signed_in? %>
-        <div class="navbar-nav">
-          <%= link_to "My Bookings", user_bookings_path(current_user), class: "mx-3 nav-btn" %>
-          <%= link_to "Sign Out", destroy_user_session_path, class: "mx-3 nav-btn" %>
-        </div>
-      <% elsif host_signed_in? %>
-        <div class="navbar-nav">
-          <%= link_to "Sign Out", destroy_host_session_path, class: "mx-3 nav-btn" %>
-        </div>
+    <div>
+      <% if host_signed_in? %>
+        Hey there, <%= current_host.first_name %>! &#128522;
+      <% elsif user_signed_in? %>
+        Hey there, <%= current_user.first_name %>! &#128522;
       <% else %>
-      <div class="navbar-nav">
-        <%= link_to "Are you a host?", new_host_session_path, class: "mx-3 nav-btn" %>
-        <%= link_to "Sign Up", new_user_registration_path, class: "mx-3 nav-btn" %>
-        <%= link_to "Login", new_user_session_path, class: "mx-3 nav-btn" %>
-      </div>
+        <!-- whether I am in a exp sek login or host login -->
+        Hey there, <%= role_helper %>!
       <% end %>
-      <!--
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Features</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Pricing</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
-    </ul> -->
-  </div>
-</nav>
+    </div>
+
+    <div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <% if host_signed_in? %>
+          <ul class="navbar-nav">
+            <li class="nav-item"><%= link_to "Sign Out", destroy_host_session_path, class: "mx-3 nav-btn" %></li>
+          </ul>
+        <% elsif user_signed_in? %>
+          <ul class="navbar-nav">
+            <li class="nav-item"><%= link_to "My Bookings", user_bookings_path(current_user), class: "mx-3 nav-btn" %></li>
+            <li class="nav-item"><%= link_to "Sign Out", destroy_user_session_path, class: "mx-3 nav-btn" %></li>
+          </ul>
+        <% else %>
+        <ul class="navbar-nav">
+          <% if role_helper == 'experience-seeker' %>
+            <li class="nav-item"><%= link_to "Are you a host?", new_host_session_path, class: "mx-3 nav-btn" %></li>
+            <li class="nav-item"><%= link_to "Sign Up", new_user_registration_path, class: "mx-3 nav-btn" %></li>
+            <li class="nav-item"> <%= link_to "Login", new_user_session_path, class: "mx-3 nav-btn" %></li>
+          <% else %>
+            <li class="nav-item"><%= link_to "Are you an experience-seeker?", new_user_session_path, class: "mx-3 nav-btn" %></li>
+            <li class="nav-item"><%= link_to "Sign Up", new_host_registration_path, class: "mx-3 nav-btn" %></li>
+            <li class="nav-item"> <%= link_to "Login", new_host_session_path, class: "mx-3 nav-btn" %></li>
+          <% end %>
+        </ul>
+        <% end %>
+      </div>
+    </div>
+  </nav>
