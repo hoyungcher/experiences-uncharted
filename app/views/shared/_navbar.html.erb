@@ -7,6 +7,16 @@
     </div>
   </nav> -->
 
+    <div class="welcome">
+      <% if host_signed_in? %>
+        Hey there, <%= current_host.first_name %>!
+      <% elsif user_signed_in? %>
+        Hey there, <%= current_user.first_name %>!
+      <% else %>
+        <!-- whether I am in a exp sek login or host login -->
+        Hey there, <%= role_helper %>!
+      <% end %>
+    </div>
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between">
     <div>
@@ -21,16 +31,7 @@
       <% end %>
     </div>
 
-    <div>
-      <% if host_signed_in? %>
-        Hey there, <%= current_host.first_name %>!
-      <% elsif user_signed_in? %>
-        Hey there, <%= current_user.first_name %>!
-      <% else %>
-        <!-- whether I am in a exp sek login or host login -->
-        Hey there, <%= role_helper %>!
-      <% end %>
-    </div>
+
 
     <div>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

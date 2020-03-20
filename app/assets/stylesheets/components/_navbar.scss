@@ -32,3 +32,12 @@
   text-decoration: none;
   color: teal;
 }
+
+.welcome {
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  left: calc(40vw);
+  top: 8px;
+  font-size: 18px;
+}
