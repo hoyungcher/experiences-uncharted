@@ -15,7 +15,7 @@
         <% (ratings.inject{ |sum, el| sum + el }.to_f / ratings.size).round().times do %>
           <i class="fas fa-star"></i>
         <% end %>
-        (<%= ratings.length %> reviews)
+        (<%= pluralize( ratings.length, "review" ) %>)
       </div>
       <% end %>
     </div>
