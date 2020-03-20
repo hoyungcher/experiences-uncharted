@@ -20,7 +20,7 @@
     </div>
     <div>
       <% if current_host == Activity.find(params[:id]).host %>
-        <%= link_to "Edit Activity", edit_host_activity_path(Activity.find(params[:id]), current_host), class: "btn-navbar" %>
+        <%= link_to "Edit Activity", edit_host_activity_path(current_host, Activity.find(params[:id])), class: "btn-navbar" %>
       <% elsif current_user.nil? %>
         <%= link_to "Show Dates", new_user_session_path, class: "btn-navbar" %>
       <% else %>
