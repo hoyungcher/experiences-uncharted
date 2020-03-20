@@ -6,7 +6,7 @@ module ApplicationHelper
     elsif controller.class == SessionsController
       "host"
     else
-    "stranger"
+    "experience-seeker"
     end
   end
 end

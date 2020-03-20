@@ -23,9 +23,9 @@
 
     <div>
       <% if host_signed_in? %>
-        Hey there, <%= current_host.first_name %>! &#128522;
+        Hey there, <%= current_host.first_name %>!
       <% elsif user_signed_in? %>
-        Hey there, <%= current_user.first_name %>! &#128522;
+        Hey there, <%= current_user.first_name %>!
       <% else %>
         <!-- whether I am in a exp sek login or host login -->
         Hey there, <%= role_helper %>!
@@ -52,10 +52,14 @@
             <li class="nav-item"><%= link_to "Are you a host?", new_host_session_path, class: "mx-3 nav-btn" %></li>
             <li class="nav-item"><%= link_to "Sign Up", new_user_registration_path, class: "mx-3 nav-btn" %></li>
             <li class="nav-item"> <%= link_to "Login", new_user_session_path, class: "mx-3 nav-btn" %></li>
-          <% else %>
+          <% elsif role_helper == "host" %>
             <li class="nav-item"><%= link_to "Are you an experience-seeker?", new_user_session_path, class: "mx-3 nav-btn" %></li>
             <li class="nav-item"><%= link_to "Sign Up", new_host_registration_path, class: "mx-3 nav-btn" %></li>
             <li class="nav-item"> <%= link_to "Login", new_host_session_path, class: "mx-3 nav-btn" %></li>
+          <% else %>
+            <li class="nav-item"><%= link_to "Are you a host?", new_host_session_path, class: "mx-3 nav-btn" %></li>
+            <li class="nav-item"><%= link_to "Sign Up", new_user_registration_path, class: "mx-3 nav-btn" %></li>
+            <li class="nav-item"> <%= link_to "Login", new_user_session_path, class: "mx-3 nav-btn" %></li>
           <% end %>
         </ul>
         <% end %>
