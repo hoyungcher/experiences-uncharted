@@ -1,11 +1,14 @@
-<h2 class="text-center" style="margin-bottom: 60px;" dataset-spanish = "Elija su ciudad preferida" dataset-english= "Choose your Location">Choose your Location</h2>
+<div id="location">
+</div>
+
+<h2 class="text-center" style="margin-bottom: 60px;" dataset-spanish = "Elija su ciudad preferida" dataset-english= "Choose your Location">1. Choose your Location</h2>
 
 <div class="choose-location">
   <div class="scrolling-wrapper">
     <% @cities.sort.each do |city| %>
       <div class="city-card" id="<%= city.downcase %>">
         <h4 class="city-name"><%= city.upcase %></h4>
-        <img src="https://source.unsplash.com/180x270/?<%= city %>" >
+        <img src="https://source.unsplash.com/250x375/?<%= city %>" >
       </div>
     <% end %>
   </div>
@@ -22,14 +25,14 @@
 
 <div id="scroll-to-category"></div>
 
-<h2 class="text-center" style="margin-bottom: 60px;" dataset-spanish = "Elija su categoría preferida" dataset-english="Choose your Category">Choose your Category</h2>
+<h2 class="text-center" style="margin-bottom: 60px;" dataset-spanish = "Elija su categoría preferida" dataset-english="Choose your Category">2. Choose your Category</h2>
 
 <div id="choose-category">
   <div class="scrolling-wrapper">
     <% @tags.each do |tag| %>
       <div class="category-card" data-tag= "<%= tag.name %>">
         <h4 class="category-name" ><%= tag.name.gsub("-"," ").upcase %></h4>
-        <img src="https://source.unsplash.com/180x270/?<%= tag.name %>" >
+        <img src="https://source.unsplash.com/250x375/?<%= tag.name %>" >
       </div>
     <% end %>
   </div>
