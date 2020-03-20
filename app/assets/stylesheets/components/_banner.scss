@@ -19,11 +19,21 @@
   z-index: 999;
 }
 
-#aventure-description {
+#begin-btn {
+  background-color: rgba(0,0,0,0.6);
+  color: white;
+  border-radius: 50px;
+  padding: 12px 36px;
   font-size: 24px;
-  color: black;
-  opacity: .7;
+  display: inline-block;
+  transition: .2s;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-  text-align: center;
-  z-index: 999;
+  margin-top: -20px;
+}
+#begin-btn:hover {
+  // background-color: white;
+  background-color: black;
+  opacity: 1;
+  // font-weight: bold;
+  cursor: pointer;
 }
