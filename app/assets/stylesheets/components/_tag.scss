@@ -109,3 +109,11 @@ h4.city-name {
   filter: brightness(125%);
   text-shadow: 0px 1px rgb(220, 220, 220);
 }
+
+.city-card:hover {
+  cursor: pointer;
+}
+
+.category-card:hover {
+  cursor: pointer;
+}
